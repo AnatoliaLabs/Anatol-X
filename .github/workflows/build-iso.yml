@@ -1,0 +1,41 @@
+name: Build Anatol-X ISO
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Sürüm numarası (ör: 26.1)'
+        required: true
+        default: '26.1'
+      release_type:
+        description: 'Beta or Final'
+        required: true
+        default: 'beta'
+        type: choice
+        options:
+        - beta
+        - final
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install KIWI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y kiwi-tools
+
+    - name: Build ISO with KIWI
+      run: |
+        sudo kiwi-ng --profile AnatolX-GNOME system build --description ./build-config \
+          --target-dir ./build-result
+
+    - name: Upload ISO
+      uses: actions/upload-artifact@v4
+      with:
+        name: Anatol-X-${{ inputs.version }}-${{ inputs.release_type }}
+        path: build-result/*.iso
