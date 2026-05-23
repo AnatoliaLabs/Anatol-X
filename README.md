@@ -1,20 +1,22 @@
 # Anatol-X
 
-**CachyOS performans + Pardus kullanım kolaylığı** bir arada.
+CachyOS performansını + Pardus kullanım kolaylığını birleştiren, **Fedora 44 tabanlı** modern Türk Linux dağıtımı.
 
-Fedora 44 tabanlı, KIWI ile ISO build edilen, GitHub Actions üzerinden geliştirilen modern Linux dağıtımı.
-
-## Vizyon
-- Global hedefli açık kaynak dağıtım
-- Yüksek performans (CachyOS tarzı kernel optimizasyonları)
-- Kolay kullanım (Pardus tarzı özelleştirmeler)
-- Kurulumda masaüstü ortamı seçeneği
-
-## Sürüm Takvimi
-- Fedora 44 → Anatol-X 26.1 (2026 İlk Sürüm)
-- Fedora 45 → Anatol-X 26.2
+**Hedef:** Global pazarda rekabetçi, kullanıcı dostu, yüksek performanslı bir dağıtım.
 
 ## Özellikler
-- GNOME varsayılan ISO
-- CachyOS benzeri kernel
-- Pardus tarzı önceden yapılandırılmış deneyim
+- Fedora 44 base
+- CachyOS tarzı Zen Kernel + performans optimizasyonları
+- Pardus benzeri pre-configured masaüstü deneyimi
+- Kurulumda masaüstü ortamı seçimi (GNOME varsayılan)
+- Kendi bağımsız repository sistemi (Fedora repo bağımlılığını minimize)
+
+## Sürüm Takvimi
+- Fedora 44 → Anatol-X 26.1
+- Fedora 45 → Anatol-X 26.2
+
+## Build Etme
+
+GitHub Actions ile otomatik ISO build.
+
+See `.github/workflows/build-iso.yml`
