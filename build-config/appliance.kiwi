@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="7.5" name="Anatol-X">
+    <description type="system">
+        <author>Anatolia Labs</author>
+        <contact>https://github.com/AnatoliaLabs/Anatol-X</contact>
+        <specification>Anatol-X - Performanslı ve Kullanışlı Fedora Tabanlı Dağıtım</specification>
+    </description>
+
+    <preferences>
+        <version>26.1</version>
+        <packagemanager>dnf</packagemanager>
+        <type image="iso" boot="fedora" format="iso" hybridpersistent="true">
+            <bootkernel>kernel-cachyos</bootkernel>
+        </type>
+    </preferences>
+
+    <repository type="rpm-md">
+        <source path="https://mirrors.fedoraproject.org/metalink?repo=fedora-44&arch=$arch"/>
+    </repository>
+
+    <packages type="image">
+        <package name="kernel-cachyos"/>
+        <package name="@gnome-desktop"/>
+        <package name="gnome-software"/>
+        <package name="plymouth"/>
+    </packages>
+</image>
