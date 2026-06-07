@@ -1,7 +1,7 @@
 # 🚀 Anatol-X Linux
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/AnatoliaLabs/Anatol-X/iso-builder.yml?branch=main&style=for-the-badge&label=ISO%20Build)
-![License](https://img.shields.io/github/license/AnatoliaLabs/Anatol-X?style=for-the-badge&color=blue)
+![License](https://img.shields.io/github/license/AnatoliaLabs/Anatol-X)
 ![Fedora Version](https://img.shields.io/badge/Fedora-44-darkblue?style=for-the-badge&logo=fedora)
 
 **Anatol-X** is a modern, versatile, and robust Fedora-based Linux distribution crafted by **Anatolia Labs**. Our core mission is simple yet ambitious: **To cure the endless cycle of "Distro Hopping"** by providing everything a user could ever need in a single, bulletproof operating system.
