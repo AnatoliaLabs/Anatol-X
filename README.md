@@ -1,6 +1,6 @@
 # 🚀 Anatol-X Linux
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/AnatoliaLabs/Anatol-X/iso-builder.yml?branch=main&style=for-the-badge&label=ISO%20Build)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/AnatoliaLabs/Anatol-X/.github/workflows/iso-builder.yml?branch=main&style=for-the-badge&label=ISO%20Build)
 ![License](https://img.shields.io/github/license/AnatoliaLabs/Anatol-X)
 ![Fedora Version](https://img.shields.io/badge/Fedora-44-darkblue?style=for-the-badge&logo=fedora)
 
