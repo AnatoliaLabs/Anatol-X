@@ -44,9 +44,9 @@ Anatol-X-Beta
 
 ## 👥 Anatolia Labs Team
 Anatol-X is actively developed and maintained by a dynamic 3-person team during an intensive 1-month sprint:
- * **[[@TheE1even11](https://github.com/TheE1even11)]** - *ISO & Infrastructure (DevOps)*
- * **[[@cumaturanyenilmez-rgb](https://github.com/cumaturanyenilmez-rgb)]** - *Website administrator & Desktop Customization*
- * **[[@kagankiriktas80-create](https://github.com/kagankiriktas80-create)]** - *App Developer & Product Lead*
+ * **[[Yusuf Baran Kolsuzoğlu](https://github.com/TheE1even11)]** - *ISO & Infrastructure (DevOps)*
+ * **[[Cuma](https://github.com/cumaturanyenilmez-rgb)]** - *Website administrator & Desktop Customization*
+ * **[[@kagankiriktas00-cmd](https://github.com/kagankiriktas00-cmd)]** - *App Developer & Product Lead*
 
 ## 📄 License
 Anatol-X is open-source software licensed under the **GNU General Public License v3.0 (GPL-3.0)**. You are free to share, modify, and distribute this project, provided that all derivatives remain open-source under the same terms. For more details, please refer to the [LICENSE](LICENSE) file.
