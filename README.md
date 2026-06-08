@@ -50,3 +50,9 @@ Anatol-X is actively developed and maintained by a dynamic 3-person team during 
 
 ## 📄 License
 Anatol-X is open-source software licensed under the **GNU General Public License v3.0 (GPL-3.0)**. You are free to share, modify, and distribute this project, provided that all derivatives remain open-source under the same terms. For more details, please refer to the [LICENSE](LICENSE) file.
+
+## 📨 Anatolia Labs contact information
+Main email address: anatoliaosf@proton.me
+Secondary email address: anatoliaosf@gmail.com 
+Yusuf Baran Kolsuzoğlu main email adress: yusufbaran1160@proton.me
+Yusuf Baran Kolsuzoğlu secondary email adress: yusufbaran1160@gmail.com
