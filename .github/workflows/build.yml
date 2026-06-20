@@ -1,0 +1,41 @@
+name: Anatol-X CI Build
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depoyu Klonla
+        uses: actions/checkout@v4
+
+      - name: Runner Disk Alanı Aç
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
+      - name: Live-Build ve Bağımlılıkları Kur
+        run: sudo apt-get update && sudo apt-get install -y live-build debootstrap curl
+
+      - name: Live-Build Konfigürasyonu
+        run: sudo lb config
+
+      - name: Anatol-X ISO Build Et
+        run: sudo lb build
+
+      - name: Artifact Yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: Anatol-X-26.0.iso
+          path: live-image-amd64.hybrid.iso
+          retention-days: 7
