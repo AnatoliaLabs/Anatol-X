@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+lb config noauto \
+    --distribution testing \
+    --architecture amd64 \
+    --archive-areas "main contrib non-free non-free-firmware" \
+    --linux-packages "none" \
+    --bootappend-live "boot=live components quiet splash mitigations=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=25 threadirqs" \
+    --iso-application "Anatol-X" \
+    --iso-publisher "AnatoliaLabs" \
+    --iso-volume "Anatol-X-26.0" \
+    "${@}"
