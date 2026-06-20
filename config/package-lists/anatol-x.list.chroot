@@ -1,0 +1,21 @@
+# Kernel
+linux-image-liquorix-amd64
+linux-headers-liquorix-amd64
+
+# Temel Sistem
+systemd-sysv
+network-manager
+sudo
+nano
+curl
+wget
+firefox
+
+# Masaüstü (Örnek olarak KDE Plasma tabanı)
+kde-plasma-desktop
+sddm
+pipewire
+pipewire-audio-client-libraries
+
+# Yükleyici
+calamares
