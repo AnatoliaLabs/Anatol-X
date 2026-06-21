@@ -24,6 +24,9 @@ jobs:
       - name: Live-Build ve Bağımlılıkları Kur
         run: sudo apt-get update && sudo apt-get install -y live-build debootstrap curl
 
+      - name: Build Ortamını Sıfırla
+        run: sudo lb clean --purge
+
       - name: Live-Build Konfigürasyonu
         run: sudo lb config
 
@@ -34,5 +37,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Anatol-X-26.0.iso
-          path: live-image-amd64.hybrid.iso
+          path: ./*.iso
           retention-days: 7
