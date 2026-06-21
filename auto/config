@@ -3,14 +3,13 @@
 set -e
 
 lb config noauto \
+    --mode debian \
     --distribution testing \
     --architecture amd64 \
     --archive-areas "main contrib non-free non-free-firmware" \
     --mirror-bootstrap "https://deb.debian.org/debian" \
     --mirror-chroot "https://deb.debian.org/debian" \
     --mirror-binary "https://deb.debian.org/debian" \
-    --security false \
-    --updates false \
     --linux-packages "none" \
     --bootappend-live "boot=live components quiet splash mitigations=off zswap.enabled=1 zswap.compressor=lz4 zswap.max_pool_percent=25 threadirqs" \
     --iso-application "Anatol-X" \
