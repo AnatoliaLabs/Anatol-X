@@ -22,7 +22,17 @@ jobs:
           swap-storage: true
 
       - name: Live-Build ve Bağımlılıkları Kur
-        run: sudo apt-get update && sudo apt-get install -y live-build debootstrap curl
+        run: sudo apt-get update && sudo apt-get install -y live-build debootstrap curl dos2unix
+
+      - name: Dosya Formatlarını ve İzinlerini Düzelt
+        run: |
+          # 1. Kopyala/Yapıştır sırasındaki gizli karakterleri ve satır sonlarını temizle
+          find auto/ -type f -exec sudo dos2unix {} +
+          if [ -d "config/hooks/" ]; then find config/hooks/ -type f -exec sudo dos2unix {} +; fi
+          
+          # 2. GitHub Web'den eklenen dosyalara çalışma (Execute) izni ver
+          sudo chmod +x auto/*
+          if [ -d "config/hooks/live/" ]; then sudo chmod +x config/hooks/live/*; fi
 
       - name: Build Ortamını Sıfırla
         run: sudo lb clean --purge
