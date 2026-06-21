@@ -9,7 +9,7 @@ sudo
 nano
 curl
 wget
-firefox
+firefox*
 
 # Masaüstü (Örnek olarak KDE Plasma tabanı)
 kde-plasma-desktop
