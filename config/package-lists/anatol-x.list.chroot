@@ -3,6 +3,10 @@ live-boot
 live-config
 live-config-systemd
 
+# Çakışmayı Önlemek İçin SysVinit Paketlerini Kesin Olarak Yasakla
+live-config-sysvinit-
+sysvinit-core-
+
 # Temel Sistem ve Init Sistemi
 systemd
 systemd-sysv
@@ -13,7 +17,7 @@ curl
 wget
 firefox-esr
 
-# Masaüstü (Örnek olarak KDE Plasma tabanı)
+# Masaüstü (KDE Plasma Tabanı)
 kde-plasma-desktop
 sddm
 pipewire
