@@ -21,16 +21,20 @@ jobs:
           docker-images: true
           swap-storage: true
 
-      - name: Live-Build ve Bağımlılıkları Kur
-        run: sudo apt-get update && sudo apt-get install -y live-build debootstrap curl dos2unix
+      - name: Resmi Debian Live-Build'i Kaynaktan Kur
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y debootstrap curl dos2unix git make
+          # Ubuntu'nun hatalı paketi yerine resmi Debian live-build kaynak kodunu kuruyoruz
+          git clone https://salsa.debian.org/live-team/live-build.git
+          cd live-build
+          sudo make install
+          cd ..
 
       - name: Dosya Formatlarını ve İzinlerini Düzelt
         run: |
-          # 1. Kopyala/Yapıştır sırasındaki gizli karakterleri ve satır sonlarını temizle
           find auto/ -type f -exec sudo dos2unix {} +
           if [ -d "config/hooks/" ]; then find config/hooks/ -type f -exec sudo dos2unix {} +; fi
-          
-          # 2. GitHub Web'den eklenen dosyalara çalışma (Execute) izni ver
           sudo chmod +x auto/*
           if [ -d "config/hooks/live/" ]; then sudo chmod +x config/hooks/live/*; fi
 
