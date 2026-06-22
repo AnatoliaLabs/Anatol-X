@@ -1,7 +1,0 @@
-Package: live-config-sysvinit
-Pin: release *
-Pin-Priority: -1
-
-Package: sysvinit-core
-Pin: release *
-Pin-Priority: -1
