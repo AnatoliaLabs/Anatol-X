@@ -3,3 +3,6 @@ set -e
 
 echo "I: Liquorix deposu ekleniyor..."
 curl -s 'https://liquorix.net/install-liquorix.sh' | bash
+
+echo "I: Liquorix kernel paketleri kuruluyor..."
+apt-get install -y linux-image-liquorix-amd64 linux-headers-liquorix-amd64
