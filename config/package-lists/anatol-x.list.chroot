@@ -1,4 +1,10 @@
-# Temel Sistem
+# Canlı Sistem Bileşenleri (Systemd Uyumlu)
+live-boot
+live-config
+live-config-systemd
+
+# Temel Sistem ve Init Sistemi
+systemd
 systemd-sysv
 network-manager
 sudo
