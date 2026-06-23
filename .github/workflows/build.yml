@@ -1,7 +1,8 @@
 name: Anatol-X CI Build
 
+# Sadece manuel tetikleme (GitHub arayüzünden Run workflow butonu ile)
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,11 +22,11 @@ jobs:
           docker-images: true
           swap-storage: true
 
-      - name: Resmi Debian Live-Build'i Kaynaktan Kur
+      - name: Bağımlılıkları Kur ve Live-Build'i Kaynaktan Derle
         run: |
           sudo apt-get update
-          # po4a paketini bağımlılıkların sonuna ekledik
-          sudo apt-get install -y debootstrap curl dos2unix git make gettext po4a
+          # debian-archive-keyring paketi eklendi!
+          sudo apt-get install -y debootstrap curl dos2unix git make gettext po4a debian-archive-keyring
           
           # Resmi Debian live-build kaynak kodunu kuruyoruz
           git clone https://salsa.debian.org/live-team/live-build.git
