@@ -1,7 +1,7 @@
 name: Anatol-X CI Build
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -24,8 +24,10 @@ jobs:
       - name: Resmi Debian Live-Build'i Kaynaktan Kur
         run: |
           sudo apt-get update
-          sudo apt-get install -y debootstrap curl dos2unix git make
-          # Ubuntu'nun hatalı paketi yerine resmi Debian live-build kaynak kodunu kuruyoruz
+          # gettext paketini (msgfmt komutu için) buraya ekledik
+          sudo apt-get install -y debootstrap curl dos2unix git make gettext
+          
+          # Resmi Debian live-build kaynak kodunu kuruyoruz
           git clone https://salsa.debian.org/live-team/live-build.git
           cd live-build
           sudo make install
