@@ -32,27 +32,24 @@ jobs:
 
       - name: Liquorix Deposunu ve Anahtarlarını Enjekte Et
         run: |
-          # Live-build'in resmi üçüncü parti depo mekanizmasını hazırlıyoruz
           mkdir -p config/archives
-          
-          # Depo adreslerini ekle (Hem canlı sistem hem de kurulu sistem için)
           echo "deb http://liquorix.net/debian sid main" | sudo tee config/archives/liquorix.list.chroot
           echo "deb http://liquorix.net/debian sid main" | sudo tee config/archives/liquorix.list.binary
-          
-          # Liquorix resmi GPG anahtarını indir ve güvenli klasöre yaz
           curl -fsSL https://liquorix.net/liquorix-keyring.gpg | sudo tee config/archives/liquorix.key.chroot > /dev/null
           curl -fsSL https://liquorix.net/liquorix-keyring.gpg | sudo tee config/archives/liquorix.key.binary > /dev/null
 
       - name: Dosya Formatlarını ve İzinlerini Düzelt
         run: |
-          # Artık geçersiz ve hatalı olan eski hook dosyasını otomatik imha et
+          # Eski hatalı hook dosyasını sil
           rm -f config/hooks/live/01-liquorix-repo.hook.chroot
           
-          # Geri kalan tüm betiklerin satır sonlarını ve izinlerini ayarla
+          # Satır sonlarını düzelt (find kullanarak boş klasör çökmelerini önlüyoruz)
           find auto/ -type f -exec sudo dos2unix {} +
           if [ -d "config/hooks/" ]; then find config/hooks/ -type f -exec sudo dos2unix {} +; fi
-          sudo chmod +x auto/*
-          if [ -d "config/hooks/live/" ]; then sudo chmod +x config/hooks/live/*; fi
+          
+          # İzinleri ayarla (yıldız karakteri yerine güvenli find komutuna geçtik)
+          find auto/ -type f -exec sudo chmod +x {} +
+          if [ -d "config/hooks/live/" ]; then find config/hooks/live/ -type f -exec sudo chmod +x {} +; fi
 
       - name: Build Ortamını Sıfırla
         run: sudo lb clean --purge
