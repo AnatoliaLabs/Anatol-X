@@ -1,6 +1,5 @@
 name: Anatol-X CI Build
 
-# Sadece manuel tetikleme (GitHub arayüzünden Run workflow butonu ile)
 on:
   workflow_dispatch:
 
@@ -25,17 +24,31 @@ jobs:
       - name: Bağımlılıkları Kur ve Live-Build'i Kaynaktan Derle
         run: |
           sudo apt-get update
-          # debian-archive-keyring paketi eklendi!
           sudo apt-get install -y debootstrap curl dos2unix git make gettext po4a debian-archive-keyring
-          
-          # Resmi Debian live-build kaynak kodunu kuruyoruz
           git clone https://salsa.debian.org/live-team/live-build.git
           cd live-build
           sudo make install
           cd ..
 
+      - name: Liquorix Deposunu ve Anahtarlarını Enjekte Et
+        run: |
+          # Live-build'in resmi üçüncü parti depo mekanizmasını hazırlıyoruz
+          mkdir -p config/archives
+          
+          # Depo adreslerini ekle (Hem canlı sistem hem de kurulu sistem için)
+          echo "deb http://liquorix.net/debian sid main" | sudo tee config/archives/liquorix.list.chroot
+          echo "deb http://liquorix.net/debian sid main" | sudo tee config/archives/liquorix.list.binary
+          
+          # Liquorix resmi GPG anahtarını indir ve güvenli klasöre yaz
+          curl -fsSL https://liquorix.net/liquorix-keyring.gpg | sudo tee config/archives/liquorix.key.chroot > /dev/null
+          curl -fsSL https://liquorix.net/liquorix-keyring.gpg | sudo tee config/archives/liquorix.key.binary > /dev/null
+
       - name: Dosya Formatlarını ve İzinlerini Düzelt
         run: |
+          # Artık geçersiz ve hatalı olan eski hook dosyasını otomatik imha et
+          rm -f config/hooks/live/01-liquorix-repo.hook.chroot
+          
+          # Geri kalan tüm betiklerin satır sonlarını ve izinlerini ayarla
           find auto/ -type f -exec sudo dos2unix {} +
           if [ -d "config/hooks/" ]; then find config/hooks/ -type f -exec sudo dos2unix {} +; fi
           sudo chmod +x auto/*
