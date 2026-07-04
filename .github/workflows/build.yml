@@ -70,7 +70,9 @@ jobs:
         with:
           host: frs.sourceforge.net
           username: ${{ secrets.SF_USERNAME }}
-          password: ${{ secrets.SF_PASSWORD }}
+          key: ${{ secrets.SF_SSH_KEY }}
           source: "anatol-x-alpha-1.iso"
-          # SourceForge "anatolialabs" projesi ve "Alpha 1" alt klasörü
           target: "/home/frs/project/anatolialabs/Alpha 1/"
+          # Bazı durumlarda strict host checking kapatmak hata almayı önler:
+          strip_components: 0
+          tar_tmp_path: /tmp/
