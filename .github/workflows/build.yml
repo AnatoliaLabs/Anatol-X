@@ -72,7 +72,7 @@ jobs:
           username: ${{ secrets.SF_USERNAME }}
           key: ${{ secrets.SF_SSH_KEY }}
           source: "anatol-x-alpha-1.iso"
-          target: "/home/frs/project/anatolialabs/Alpha 1/"
+          target: "/home/frs/project/anatolialabs/Alpha-1/"
           # Bazı durumlarda strict host checking kapatmak hata almayı önler:
           strip_components: 0
           tar_tmp_path: /tmp/
