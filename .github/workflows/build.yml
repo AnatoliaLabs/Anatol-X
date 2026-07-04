@@ -65,14 +65,15 @@ jobs:
           path: anatol-x-alpha-1.iso
           retention-days: 7
 
-      - name: Anatol-X ISO'yu SourceForge'a Yükle
-        uses: appleboy/scp-action@master
-        with:
-          host: frs.sourceforge.net
-          username: ${{ secrets.SF_USERNAME }}
-          key: ${{ secrets.SF_SSH_KEY }}
-          source: "anatol-x-alpha-1.iso"
-          target: "/home/frs/project/anatolialabs/Alpha-1/"
-          # Bazı durumlarda strict host checking kapatmak hata almayı önler:
-          strip_components: 0
-          tar_tmp_path: /tmp/
+      - name: Anatol-X ISO'yu SourceForge'a Yükle (Native Rsync)
+        run: |
+          # 1. SSH Anahtarını Linux makinesine güvenle tanıtıyoruz
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SF_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          # 2. SourceForge'un güvenlik parmak izini onaylıyoruz (bağlantı takılı kalmasın diye)
+          ssh-keyscan -H frs.sourceforge.net >> ~/.ssh/known_hosts
+          
+          # 3. Dosyayı kopmadan, en stabil yöntem olan Rsync ile yolluyoruz
+          rsync -e "ssh -i ~/.ssh/id_rsa" -avP anatol-x-alpha-1.iso ${{ secrets.SF_USERNAME }}@frs.sourceforge.net:/home/frs/project/anatolialabs/Alpha-1/
