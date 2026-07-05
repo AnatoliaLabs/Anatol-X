@@ -1,4 +1,4 @@
-name: Anatol-X CI Build
+name: Anatol-X ISO Build
 
 on:
   workflow_dispatch:
@@ -10,10 +10,10 @@ jobs:
       - name: Depoyu Klonla
         uses: actions/checkout@v4
 
-      - name: Runner Disk Alanı Aç
+      - name: Disk Alanı Aç
         uses: jlumbroso/free-disk-space@main
         with:
-          tool-cache: false
+          tool-cache: true
           android: true
           dotnet: true
           haskell: true
@@ -21,59 +21,25 @@ jobs:
           docker-images: true
           swap-storage: true
 
-      - name: Bağımlılıkları Kur ve Live-Build'i Kaynaktan Derle
+      - name: Gerekli Paketleri Kur
         run: |
-          sudo apt-get update
-          sudo apt-get install -y debootstrap curl dos2unix git make gettext po4a debian-archive-keyring
+          sudo apt update
+          sudo apt install -y debootstrap curl git make gettext po4a rsync
           git clone https://salsa.debian.org/live-team/live-build.git
           cd live-build
           sudo make install
-          cd ..
 
-      - name: Liquorix Deposunu ve Anahtarlarını Enjekte Et
+      - name: ISO'yu Derle
         run: |
-          mkdir -p config/archives
-          echo "deb http://liquorix.net/debian sid main" | sudo tee config/archives/liquorix.list.chroot
-          echo "deb http://liquorix.net/debian sid main" | sudo tee config/archives/liquorix.list.binary
-          curl -fsSL https://liquorix.net/liquorix-keyring.gpg | sudo tee config/archives/liquorix.key.chroot > /dev/null
-          curl -fsSL https://liquorix.net/liquorix-keyring.gpg | sudo tee config/archives/liquorix.key.binary > /dev/null
-
-      - name: Dosya Formatlarını ve İzinlerini Düzelt
-        run: |
-          rm -f config/hooks/live/01-liquorix-repo.hook.chroot
-          find auto/ -type f -exec sudo dos2unix {} +
-          if [ -d "config/hooks/" ]; then find config/hooks/ -type f -exec sudo dos2unix {} +; fi
-          find auto/ -type f -exec sudo chmod +x {} +
-          if [ -d "config/hooks/live/" ]; then find config/hooks/live/ -type f -exec sudo chmod +x {} +; fi
-
-      - name: Build Ortamını Sıfırla
-        run: sudo lb clean --purge
-
-      - name: Live-Build Konfigürasyonu
-        run: sudo lb config
-
-      - name: Anatol-X ISO Build Et ve Yeniden Adlandır
-        run: |
+          sudo lb config
           sudo lb build
-          # Oluşan karmaşık isimli ISO dosyasını istediğin formata çeviriyoruz
-          sudo mv *.iso anatol-x-alpha-1.iso
 
-      - name: Artifact Olarak Yükle (GitHub'da 7 gün yedek olarak kalır)
-        uses: actions/upload-artifact@v4
-        with:
-          name: anatol-x-alpha-1.iso
-          path: anatol-x-alpha-1.iso
-          retention-days: 7
-
-      - name: Anatol-X ISO'yu SourceForge'a Yükle (Native Rsync)
+      - name: SourceForge'a Rsync ile Aktar (2GB+ Desteği)
         run: |
-          # 1. SSH Anahtarını Linux makinesine güvenle tanıtıyoruz
           mkdir -p ~/.ssh
           echo "${{ secrets.SF_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          
-          # 2. SourceForge'un güvenlik parmak izini onaylıyoruz (bağlantı takılı kalmasın diye)
           ssh-keyscan -H frs.sourceforge.net >> ~/.ssh/known_hosts
           
-          # 3. Dosyayı kopmadan, en stabil yöntem olan Rsync ile yolluyoruz
-          rsync -e "ssh -i ~/.ssh/id_rsa" -avP anatol-x-alpha-1.iso ${{ secrets.SF_USERNAME }}@frs.sourceforge.net:/home/frs/project/anatolialabs/Alpha-1/
+          # Boyut sınırlarına takılmadan güvenli aktarım
+          rsync -e "ssh -i ~/.ssh/id_rsa" -avP live-image-amd64.hybrid.iso ${{ secrets.SF_USERNAME }}@frs.sourceforge.net:/home/frs/project/anatolialabs/Alpha-1/Anatol-X-26.0.iso
