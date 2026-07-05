@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+echo "Anatol-X kimliği uygulanıyor..."
+
+cat > /etc/os-release <<EOF
+PRETTY_NAME="Anatol-X Linux (Alpha 2)"
+NAME="Anatol-X"
+VERSION_ID="26.0"
+VERSION="26.0 (Alpha)"
+VERSION_CODENAME=forky
+ID=anatolx
+ID_LIKE=debian
+HOME_URL="https://anatolialabs.github.io/Anatol-X"
+SUPPORT_URL="https://github.com/AnatoliaLabs/Anatol-X/issues"
+BUG_REPORT_URL="https://github.com/AnatoliaLabs/Anatol-X/issues"
+EOF
+
+cat > /etc/lsb-release <<EOF
+DISTRIB_ID=Anatol-X
+DISTRIB_RELEASE=26.0
+DISTRIB_CODENAME=forky
+DISTRIB_DESCRIPTION="Anatol-X Linux"
+EOF
