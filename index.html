@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anatol-X Linux - Maksimum performans odaklı, Debian Testing tabanlı ve Liquorix Kernel destekli özel Linux dağıtımı.">
+    <title>Anatol-X Linux | Sınırları Kaldır</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #04040c;
+            --text-main: #e2e8f0;
+            --neon-cyan: #00f0ff;
+            --neon-red: #ff003c;
+            --dark-surface: rgba(8, 8, 20, 0.85);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Hareketli Siber Izgara Arka Planı */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 200vw; height: 200vh;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: gridMove 15s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(40px) translateZ(-200px); }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #1a1a3a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+
+        /* Navigasyon */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(4, 4, 12, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo-img {
+            height: 42px;
+            width: 42px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .nav-logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .nav-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 8px var(--neon-cyan); }
+
+        /* Hero Alanı */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            background: radial-gradient(circle at center, rgba(4,4,12,0.4) 0%, var(--bg-color) 70%);
+        }
+
+        .hero-logo-large {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 12px;
+            animation: cyberPulse 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes cyberPulse {
+            0% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); border-color: var(--neon-cyan); transform: scale(1); }
+            100% { box-shadow: 0 0 35px rgba(255, 0, 60, 0.5); border-color: var(--neon-red); transform: scale(1.02); }
+        }
+
+        .glitch {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: white;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px var(--neon-cyan), -2px -2px 0px var(--neon-red);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #94a3b8;
+            max-width: 750px;
+            line-height: 1.6;
+        }
+
+        /* İstatistikler */
+        .live-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .stat-box {
+            flex: 1 1 200px;
+            background: rgba(15, 15, 35, 0.6);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-box:hover { border-color: var(--neon-red); transform: translateY(-3px); }
+        .stat-box .title { color: #64748b; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;}
+        .stat-box .value { color: var(--neon-cyan); font-weight: bold; font-size: 1rem; }
+
+        /* Butonlar */
+        .btn-group { margin-top: 45px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--neon-red);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #d40032;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.8);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* Özellikler */
+        section { padding: 100px 10%; position: relative; background: var(--bg-color); z-index: 2; }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: white; }
+        .section-desc { color: #64748b; font-size: 1.1rem; margin-top: 10px; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: var(--dark-surface);
+            padding: 40px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 3px solid var(--neon-cyan);
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--neon-red);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 60, 0.1);
+        }
+
+        .feature-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 15px; color: #fff; }
+        .feature-card p { font-size: 1.1rem; color: #94a3b8; line-height: 1.6; }
+
+        /* İndirme Bölümü */
+        #download {
+            background: linear-gradient(180deg, var(--bg-color) 0%, rgba(10,10,20,1) 100%);
+            text-align: center;
+        }
+
+        .download-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px 30px;
+            background: rgba(10, 10, 25, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        }
+
+        .iso-meta {
+            font-family: 'Fira Code', monospace;
+            background: #05050a;
+            padding: 15px;
+            border-radius: 6px;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin: 20px 0 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .iso-meta span { color: var(--neon-cyan); }
+
+        footer {
+            background: #020205;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 0, 60, 0.2);
+            font-size: 1rem;
+            color: #64748b;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer a { color: #fff; text-decoration: none; font-weight: 600; }
+        footer a:hover { color: var(--neon-red); }
+
+        @media (max-width: 768px) {
+            .glitch { font-size: 2.5rem; }
+            nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .hero-logo-large { width: 140px; height: 140px; }
+            .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="nav-brand">
+            <!-- GitHub raw linki eklendi -->
+            <img src="https://raw.githubusercontent.com/AnatoliaLabs/Anatol-X/main/anatol-x-logo.png" alt="Anatol-X Logo" class="nav-logo-img">
+            <span class="nav-logo-text">ANATOL-X</span>
+        </a>
+        <div class="nav-links">
+            <a href="#about">Genel Bakış</a>
+            <a href="#features">Performans</a>
+            <a href="#download">İndirme</a>
+        </div>
+    </nav>
+
+    <header id="about">
+        <!-- GitHub raw linki eklendi -->
+        <img src="https://raw.githubusercontent.com/AnatoliaLabs/Anatol-X/main/anatol-x-logo.png" alt="Anatol-X Logosu" class="hero-logo-large">
+        <h1 class="glitch">MAKSİMUM PERFORMANS</h1>
+        <p class="subtitle">Debian Testing (Forky) tabanlı mimari ve Liquorix Kernel optimizasyonlarıyla donatılmış, oyun, geliştirme ve günlük iş yükleri için tasarlanmış yeni nesil işletim sistemi.</p>
+        
+        <div class="live-stats">
+            <div class="stat-box">
+                <div class="title">Çekirdek</div>
+                <div class="value">Liquorix Zen-Tuning</div>
+            </div>
+            <div class="stat-box">
+                <div class="title">Taban</div>
+                <div class="value">Debian Testing (amd64)</div>
+            </div>
+            <div class="stat-box">
+                <div class="title">Derleme</div>
+                <div class="value">Live-build Pipeline</div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <a href="#download" class="btn btn-primary">İSO İndir</a>
+            <a href="https://github.com/AnatoliaLabs/Anatol-X" target="_blank" class="btn btn-secondary">Kaynak Kod</a>
+        </div>
+    </header>
+
+    <section id="features">
+        <div class="section-header">
+            <h2 class="section-title">Teknik Altyapı</h2>
+            <p class="section-desc">Hız için optimize edilmiş modern bileşenler.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Liquorix Entegrasyonu</h3>
+                <p>Zen Interactive Tuning, BBR2 tıkanıklık kontrolü ve yüksek çözünürlüklü zamanlayıcılar (HRTIMER) ile minimum gecikme.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Bellek Yönetimi</h3>
+                <p>Multi-Generational LRU ve LZ4 sıkıştırmalı gömülü Swap (zswap) sayesinde ağır çoklu görevlerde kilitlenmeleri önler.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Live-Build Düzeni</h3>
+                <p>Tamamen saf Debian standartlarında, gereksiz servislerden arındırılmış şeffaf ve otomatik derlenen dağıtım yapısı.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Masaüstü Seçici</h3>
+                <p>Calamares yükleyicisi üzerinden kurulum esnasında dilediğiniz arayüzü seçin. Önceden yapılandırılmış dinamik neon temalar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="download">
+        <div class="download-box">
+            <h2 style="font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 10px; color: white;">Anatol-X Edin</h2>
+            <p style="color: #94a3b8;">Donanımınızın gerçek gücünü ortaya çıkarmak için kararlı yapıyı kurun.</p>
+            
+            <div class="iso-meta">
+                DOSYA: <span>Anatol-X-26.0.iso</span> | MİMARİ: <span>amd64</span>
+            </div>
+            
+            <!-- Buton metni isteğine göre düzeltildi -->
+            <a href="https://sourceforge.net/projects/anatolialabs/files/latest/download" class="btn btn-primary" style="font-size: 1.4rem; padding: 20px 60px; width: 100%;">
+                İNDİR
+            </a>
+            
+            <p style="font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #475569; margin-top: 25px;">
+                * Kurulum medyasına yazdırırken Ventoy veya BalenaEtcher kullanılması önerilir. İndirme sonrası sha256 kontrolü yapın.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Resmi İletişim: <a href="mailto:anatoliaosf@proton.me">anatoliaosf@proton.me</a></p>
+        <p style="margin-top: 15px; font-size: 0.9rem;">
+            Açık kaynaklı geliştirme faaliyetlerimiz <a href="https://github.com/AnatoliaLabs/Anatol-X" target="_blank">GitHub</a> üzerinde yürütülmektedir.<br>
+            © 2026 Anatol-X Linux Geliştirme Takımı.
+        </p>
+    </footer>
+
+</body>
+</html>
