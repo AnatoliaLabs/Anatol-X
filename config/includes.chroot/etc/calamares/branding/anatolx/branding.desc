@@ -1,0 +1,33 @@
+---
+componentName:  anatolx
+welcomeStyleCalamares: true
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 800px,520px
+windowPlacement: center
+
+strings:
+    productName:         Anatol-X Linux
+    shortProductName:    Anatol-X
+    version:             26.0 Alpha 1
+    shortVersion:        26.0
+    versionedName:       Anatol-X Linux 26.0 Alpha
+    shortVersionedName:  Anatol-X 26.0
+    bootloaderEntryName: Anatol-X
+    productUrl:          https://anatolialabs.github.io/Anatol-X
+    supportUrl:          https://github.com/AnatoliaLabs/Anatol-X/issues
+    knownIssuesUrl:      https://github.com/AnatoliaLabs/Anatol-X/issues
+    releaseNotesUrl:     https://github.com/AnatoliaLabs/Anatol-X/releases
+
+images:
+    productLogo:         "logo.png"
+    productIcon:         "icon.png"
+    productWelcome:      "welcome.png"
+
+slideshow:               "show.qml"
+
+style:
+    sidebarBackground:    "#1A1B26"
+    sidebarText:          "#FFFFFF"
+    sidebarTextSelect:    "#00FFFF"
+    sidebarTextHighlight: "#FF3366"
