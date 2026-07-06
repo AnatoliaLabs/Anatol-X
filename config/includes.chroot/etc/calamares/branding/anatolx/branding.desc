@@ -20,9 +20,9 @@ strings:
     releaseNotesUrl:     https://github.com/AnatoliaLabs/Anatol-X/releases
 
 images:
-    productLogo:         "welcome.jpg"
-    productIcon:         "icon.jpg"
-    productWelcome:      "welcome.jpg"
+    productLogo:         "welcome.png"
+    productIcon:         "icon.png"
+    productWelcome:      "welcome.png"
 
 slideshow:               "show.qml"
 
