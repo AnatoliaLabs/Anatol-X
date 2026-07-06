@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Anatol-x Hoş Geldin
+Comment=Anatol-x hoş geldin ekranı
+Exec=/usr/bin/python3 /usr/share/anatolx-welcome/anatolx_welcome.py
+Terminal=false
+X-GNOME-Autostart-enabled=true
+NoDisplay=false
