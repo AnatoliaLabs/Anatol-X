@@ -1,0 +1,55 @@
+/* Anatol-X Neon Dark Theme için Calamares Stili */
+
+QWidget {
+    background-color: #1A1B26;
+    color: #FFFFFF;
+    font-family: "Noto Sans", sans-serif;
+}
+
+#sidebarApp {
+    background-color: #16161E;
+}
+
+QTreeView, QListView {
+    background-color: #1A1B26;
+    color: #FFFFFF;
+    border: 1px solid #00FFFF;
+    border-radius: 4px;
+}
+
+QTreeView::item:selected, QListView::item:selected {
+    background-color: #00FFFF;
+    color: #16161E;
+}
+
+QPushButton {
+    background-color: #00FFFF;
+    color: #16161E;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #FF3366;
+    color: #FFFFFF;
+}
+
+QPushButton:disabled {
+    background-color: #333333;
+    color: #777777;
+}
+
+QProgressBar {
+    border: 1px solid #333333;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #16161E;
+    color: #FFFFFF;
+}
+
+QProgressBar::chunk {
+    background-color: #00FFFF;
+    border-radius: 3px;
+}
