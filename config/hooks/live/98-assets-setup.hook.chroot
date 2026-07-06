@@ -8,11 +8,11 @@ if [ -f /usr/share/anatolx-welcome/anatolx_welcome.py ]; then
     chmod +x /usr/share/anatolx-welcome/anatolx_welcome.py
 fi
 
-# 2. SDDM Giriş ekranı duvar kağıdını Cyber-Geo imajı ile değiştir
+# 2. SDDM Giriş ekranı duvar kağıdını Cyber-Geo (.png) imajı ile değiştir
 mkdir -p /usr/share/sddm/themes/breeze/
-if [ -f /usr/share/backgrounds/anatolx/cyber-geo.jpg ]; then
-    ln -sf /usr/share/backgrounds/anatolx/cyber-geo.jpg /usr/share/sddm/themes/breeze/background.jpg
+if [ -f /usr/share/backgrounds/anatolx/cyber-geo.png ]; then
+    ln -sf /usr/share/backgrounds/anatolx/cyber-geo.png /usr/share/sddm/themes/breeze/background.png
 fi
 
 # 3. İkon ve logolar için sistem geneline okuma izni ver
-chmod 644 /usr/share/pixmaps/anatolx-logo.jpg
+chmod 644 /usr/share/pixmaps/anatolx-logo.png
