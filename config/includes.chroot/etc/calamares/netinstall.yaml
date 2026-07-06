@@ -1,0 +1,27 @@
+groups:
+  - name: "Masaüstü Ortamları"
+    description: "Anatol-X için optimize edilmiş ve neon temayla özelleştirilmiş masaüstü ortamları."
+    hidden: false
+    selected: true
+    critical: true
+    subgroups:
+      - name: "KDE Plasma (Varsayılan)"
+        description: "Anatol-X'in önerilen, yüksek performanslı ve tam özelleştirilebilir masaüstü ortamı."
+        selected: true
+        packages:
+          - kde-standard
+          - sddm
+          - sddm-theme-breeze
+      - name: "GNOME"
+        description: "Modern, sade ve üretkenlik odaklı masaüstü ortamı."
+        selected: false
+        packages:
+          - gnome-core
+          - gdm3
+      - name: "XFCE"
+        description: "Son derece hafif, kaynak dostu ve hızlı masaüstü ortamı."
+        selected: false
+        packages:
+          - xfce4
+          - xfce4-goodies
+          - lightdm
