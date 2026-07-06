@@ -1,0 +1,14 @@
+[Containments][1]
+activityId=
+formfactor=0
+immutability=0
+lastScreen=0
+location=0
+plugin=org.kde.desktopcontainment
+screen=0
+wallpaperplugin=org.kde.image
+
+[Containments][1][Wallpaper][org.kde.image][General]
+Image=file:///usr/share/backgrounds/anatolx/tux-radar.jpg
+PreviewImage=file:///usr/share/backgrounds/anatolx/tux-radar.jpg
+WallpaperMode=SingleImage
