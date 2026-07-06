@@ -28,7 +28,19 @@ jobs:
           git clone https://salsa.debian.org/live-team/live-build.git
           cd live-build
           sudo make install
-
+   
+      - name: Görselleri Konfigürasyona Dağıt
+        run: |
+          mkdir -p config/includes.chroot/etc/calamares/branding/anatolx/
+          mkdir -p config/includes.chroot/usr/share/backgrounds/anatolx/
+          mkdir -p config/includes.chroot/usr/share/pixmaps/
+          
+          cp assets/ResizedImage_2026-07-06_15-11-10_3092.jpg config/includes.chroot/etc/calamares/branding/anatolx/welcome.jpg
+          cp assets/edited-image.jpg config/includes.chroot/usr/share/backgrounds/anatolx/cyber-geo.jpg
+          cp assets/IMG-20260506-WA0002.jpg config/includes.chroot/usr/share/backgrounds/anatolx/tux-radar.jpg
+          cp assets/anatol-x-logo.jpg config/includes.chroot/etc/calamares/branding/anatolx/icon.jpg
+          cp assets/anatol-x-logo.jpg config/includes.chroot/usr/share/pixmaps/anatolx-logo.jpg
+          
       - name: ISO'yu Derle
         run: |
           sudo lb config
