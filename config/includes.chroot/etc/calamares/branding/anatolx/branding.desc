@@ -3,15 +3,15 @@ componentName:  anatolx
 welcomeStyleCalamares: true
 welcomeExpandingLogo: true
 windowExpanding: normal
-windowSize: 800px,520px
+windowSize: 800px splinter_code
 windowPlacement: center
 
 strings:
     productName:         Anatol-X Linux
     shortProductName:    Anatol-X
-    version:             26.0 Alpha 1
+    version:             26.0 Alpha 2
     shortVersion:        26.0
-    versionedName:       Anatol-X Linux 26.0 Alpha
+    versionedName:       Anatol-X Linux 26.0 Alpha 2
     shortVersionedName:  Anatol-X 26.0
     bootloaderEntryName: Anatol-X
     productUrl:          https://anatolialabs.github.io/Anatol-X
@@ -20,9 +20,9 @@ strings:
     releaseNotesUrl:     https://github.com/AnatoliaLabs/Anatol-X/releases
 
 images:
-    productLogo:         "logo.png"
-    productIcon:         "icon.png"
-    productWelcome:      "welcome.png"
+    productLogo:         "welcome.jpg"
+    productIcon:         "icon.jpg"
+    productWelcome:      "welcome.jpg"
 
 slideshow:               "show.qml"
 
