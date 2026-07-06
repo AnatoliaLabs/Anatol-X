@@ -35,11 +35,18 @@ jobs:
           mkdir -p config/includes.chroot/usr/share/backgrounds/anatolx/
           mkdir -p config/includes.chroot/usr/share/pixmaps/
           
-          cp assets/ResizedImage_2026-07-06_15-11-10_3092.jpg config/includes.chroot/etc/calamares/branding/anatolx/welcome.jpg
-          cp assets/edited-image.jpg config/includes.chroot/usr/share/backgrounds/anatolx/cyber-geo.jpg
-          cp assets/IMG-20260506-WA0002.jpg config/includes.chroot/usr/share/backgrounds/anatolx/tux-radar.jpg
-          cp assets/anatol-x-logo.jpg config/includes.chroot/etc/calamares/branding/anatolx/icon.jpg
-          cp assets/anatol-x-logo.jpg config/includes.chroot/usr/share/pixmaps/anatolx-logo.jpg
+          # 1. Calamares Hoş Geldin Görseli
+          cp assets/ResizedImage_2026-07-06_15-11-10_3092_2.jpg config/includes.chroot/etc/calamares/branding/anatolx/welcome.jpg
+          
+          # 2. Selçuklu/Siber Duvar Kağıdı
+          cp assets/58539.jpg config/includes.chroot/usr/share/backgrounds/anatolx/cyber-geo.jpg
+          
+          # 3. Tux Radar Duvar Kağıdı
+          cp assets/IMG-20260506-WA0002_2.jpg config/includes.chroot/usr/share/backgrounds/anatolx/tux-radar.jpg
+          
+          # 4. Dağıtım Logosu (Calamares ve Sistem Geneli İçin)
+          cp assets/anatol-x-logo_16.jpg config/includes.chroot/etc/calamares/branding/anatolx/icon.jpg
+          cp assets/anatol-x-logo_16.jpg config/includes.chroot/usr/share/pixmaps/anatolx-logo.jpg
           
       - name: ISO'yu Derle
         run: |
