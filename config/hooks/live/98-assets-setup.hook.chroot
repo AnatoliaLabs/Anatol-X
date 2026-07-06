@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+echo "Anatol-X Görsel Varlıkları ve İzinleri Ayarlanıyor..."
+
+# 1. Hoş geldin uygulamasını çalıştırılabilir yap
+if [ -f /usr/share/anatolx-welcome/anatolx_welcome.py ]; then
+    chmod +x /usr/share/anatolx-welcome/anatolx_welcome.py
+fi
+
+# 2. SDDM Giriş ekranı duvar kağıdını Cyber-Geo imajı ile değiştir
+mkdir -p /usr/share/sddm/themes/breeze/
+if [ -f /usr/share/backgrounds/anatolx/cyber-geo.jpg ]; then
+    ln -sf /usr/share/backgrounds/anatolx/cyber-geo.jpg /usr/share/sddm/themes/breeze/background.jpg
+fi
+
+# 3. İkon ve logolar için sistem geneline okuma izni ver
+chmod 644 /usr/share/pixmaps/anatolx-logo.jpg
