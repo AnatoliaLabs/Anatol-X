@@ -21,3 +21,8 @@ pipewire-audio-client-libraries
 
 # Yükleyici
 calamares
+calamares-settings-debian
+os-prober
+
+# Python Tkinter (Hoş Geldin Ekranı İçin)
+python3-tk
