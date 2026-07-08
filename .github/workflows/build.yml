@@ -24,7 +24,8 @@ jobs:
       - name: Gerekli Paketleri Kur
         run: |
           sudo apt update
-          sudo apt install -y debootstrap curl git make gettext po4a rsync
+          # debian-archive-keyring paketi eklendi
+          sudo apt install -y debootstrap curl git make gettext po4a rsync debian-archive-keyring
           git clone https://salsa.debian.org/live-team/live-build.git
           cd live-build
           sudo make install
