@@ -1,7 +1,7 @@
 # 🚀 Anatol-X Linux
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/AnatoliaLabs/Anatol-X/build.yml?style=for-the-badge&logo=github)
-![Version](https://img.shields.io/badge/Version-Alpha_1-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-Alpha_2-blue?style=for-the-badge)
 ![Base](https://img.shields.io/badge/Base-Debian_Testing-A81D33?style=for-the-badge&logo=debian)
 ![Kernel](https://img.shields.io/badge/Kernel-Liquorix-black?style=for-the-badge&logo=linux)
 ![Desktop](https://img.shields.io/badge/Desktop-KDE_Plasma-1D99F3?style=for-the-badge&logo=kde)
@@ -22,9 +22,9 @@
 
 ## 📥 Download & Installation
 
-Anatol-X is currently in the **Alpha 1** stage. You can safely download the latest ISO image via SourceForge:
+Anatol-X is currently in the **Alpha 2** stage. You can safely download the latest ISO image via SourceForge:
 
-👉 **[Download Anatol-X ISO (SourceForge)](https://sourceforge.net/projects/anatolialabs/files/latest/download)**
+[![Download Anatol-X](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/anatolialabs/files/latest/download)
 
 ### Installation Steps
 1. Download the `.iso` file.
@@ -69,12 +69,12 @@ sudo lb build
 
 ## 📬 Contact & Feedback
 
-Since Anatol-X is in its Alpha phase, your feedback is incredibly valuable to us! If you encounter bugs or want to suggest new features, please open an issue in the [GitHub Issues](https://www.google.com/search?q=https://github.com/AnatoliaLabs/Anatol-X/issues) section.
+Since Anatol-X is in its Alpha phase, your feedback is incredibly valuable to us! If you encounter bugs or want to suggest new features, please open an issue in the [GitHub Issues](https://github.com/AnatoliaLabs/Anatol-X/issues) section.
 
 For direct communication, you can reach the core team exclusively via the following official channels:
 
-* ✉️ **Primary Email:** [anatoliaosf@proton.me](https://www.google.com/search?q=mailto%3Aanatoliaosf%40proton.me)
-* ✉️ **Secondary Email:** [anatoliaosf@gmail.com](https://www.google.com/search?q=mailto%3Aanatoliaosf%40gmail.com)
+* ✉️ **Primary Email:** [anatoliaosf@proton.me](mailto:anatoliaosf@proton.me)
+* ✉️ **Secondary Email:** [anatoliaosf@gmail.com](mailto:anatoliaosf@gmail.com)
 
 *Note: We do not use or support any other official communication platforms at this time.*
 
@@ -85,7 +85,7 @@ This project is open-source. We extend our gratitude to the amazing open-source 
 * [The Debian Project](https://www.debian.org/)
 * [The Liquorix Kernel Team](https://liquorix.net/)
 * [KDE Plasma](https://kde.org/plasma-desktop/)
-* [The Live-Build Team](https://www.google.com/search?q=https://salsa.debian.org/live-team)
+* [The Live-Build Team](https://salsa.debian.org/live-team)
 
 ---
 
