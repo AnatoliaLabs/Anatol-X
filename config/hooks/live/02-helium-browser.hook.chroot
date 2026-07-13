@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+echo "Anatol-X: Helium Browser Sisteme Entegre Ediliyor..."
+
+# Gerekli araçların kurulu olduğundan emin olalım
+apt-get update
+apt-get install -y curl gpg
+
+# Helium resmi GPG anahtarını indir ve Debian keyring'e ekle
+curl -fsSL https://raw.githubusercontent.com/imputnet/helium-linux/main/pubkey.asc | gpg --dearmor -o /usr/share/keyrings/helium.gpg
+
+# Helium deposunu APT kaynaklarına (sources.list) ekle
+echo "deb [signed-by=/usr/share/keyrings/helium.gpg] https://pkg.helium.computer/deb stable main" > /etc/apt/sources.list.d/helium.list
+
+# Paket listelerini güncelle ve Helium'u kur
+apt-get update
+apt-get install -y helium-bin
