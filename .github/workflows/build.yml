@@ -62,4 +62,4 @@ jobs:
           ssh-keyscan -H frs.sourceforge.net >> ~/.ssh/known_hosts
           
           # Boyut sınırlarına takılmadan güvenli aktarım
-          rsync -e "ssh -i ~/.ssh/id_rsa" -avP live-image-amd64.hybrid.iso ${{ secrets.SF_USERNAME }}@frs.sourceforge.net:/home/frs/project/anatolialabs/Alpha-2/Anatol-X-Alpha-2.iso
+          rsync -e "ssh -i ~/.ssh/id_rsa" -avP live-image-amd64.hybrid.iso ${{ secrets.SF_USERNAME }}@frs.sourceforge.net:/home/frs/project/anatolialabs/Alpha-2.1/Anatol-X-Alpha-2.1.iso
