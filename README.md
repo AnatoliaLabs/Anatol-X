@@ -67,6 +67,16 @@ sudo lb build
 
 ```
 
+
+## 👥 Developers & Core Team
+
+**Yusuf Baran Kolsuzoğlu** ([@TheL1even11](https://github.com/TheL1even11)) - Founder & Core Team
+
+**Kağan Kırıktaş** ([@kagan-labs](https://github.com/kagan-labs)) - Founder & Core Team
+
+**Cuma Turan Yenilmez** ([@cumaturanyenilmez-rgb](https://github.com/cumaturanyenilmez-rgb)) - Founder & Core Team
+
+
 ## 📬 Contact & Feedback
 
 Since Anatol-X is in its Alpha phase, your feedback is incredibly valuable to us! If you encounter bugs or want to suggest new features, please open an issue in the [GitHub Issues](https://github.com/AnatoliaLabs/Anatol-X/issues) section.
