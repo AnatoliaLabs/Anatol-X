@@ -7,15 +7,21 @@ live-config-systemd
 systemd
 systemd-sysv
 network-manager
+firmware-linux
+firmware-iwlwifi
+firmware-realtek
+firmware-atheros
+firmware-brcm80211
+firmware-misc-nonfree
+network-manager
 sudo
 nano
 curl
 wget
-firefox-esr
 
 # Masaüstü (KDE Plasma Tabanı)
 kde-plasma-desktop
-sddm
+plasma-login-manager
 pipewire
 pipewire-audio-client-libraries
 
