@@ -1,0 +1,26 @@
+[
+  {
+    "name": "GitHub Issues",
+    "icon": "🐙",
+    "description": "Hata bildirin, özellik önerin veya projeye katkıda bulunun.",
+    "url": "https://github.com/AnatoliaLabs/Anatol-X/issues"
+  },
+  {
+    "name": "GitHub Reposu",
+    "icon": "📦",
+    "description": "Kaynak kodu, live-build yapılandırması ve sürümler.",
+    "url": "https://github.com/AnatoliaLabs/Anatol-X"
+  },
+  {
+    "name": "Resmi Web Sitesi",
+    "icon": "🌐",
+    "description": "Anatol-X hakkında daha fazla bilgi ve indirme bağlantısı.",
+    "url": "https://anatolialabs.github.io/Anatol-X/"
+  },
+  {
+    "name": "E-posta ile İletişim",
+    "icon": "✉️",
+    "description": "Çekirdek ekiple doğrudan iletişime geçin.",
+    "url": "mailto:anatoliaosf@proton.me"
+  }
+]
