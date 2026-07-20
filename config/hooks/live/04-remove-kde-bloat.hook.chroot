@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+echo "Anatol-X: Gereksiz KDE paketleri kaldırılıyor..."
+apt-get purge -y plasma-welcome kwalletmanager
+apt-get autoremove -y
