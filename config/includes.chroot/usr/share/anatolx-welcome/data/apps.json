@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Firefox",
+    "package": "firefox-esr",
+    "category": "İnternet",
+    "icon": "🌐",
+    "description": "Hızlı, gizliliğe önem veren açık kaynak web tarayıcısı."
+  },
+  {
+    "name": "LibreOffice",
+    "package": "libreoffice",
+    "category": "Ofis",
+    "icon": "📝",
+    "description": "Kelime işlemci, hesap tablosu ve sunum araçlarını içeren tam ofis paketi."
+  },
+  {
+    "name": "VLC Media Player",
+    "package": "vlc",
+    "category": "Multimedya",
+    "icon": "🎬",
+    "description": "Hemen hemen her ses ve video formatını oynatabilen evrensel oynatıcı."
+  },
+  {
+    "name": "GIMP",
+    "package": "gimp",
+    "category": "Grafik",
+    "icon": "🎨",
+    "description": "Fotoğraf düzenleme ve dijital sanat için güçlü açık kaynak araç."
+  },
+  {
+    "name": "Timeshift",
+    "package": "timeshift",
+    "category": "Sistem",
+    "icon": "🕒",
+    "description": "Sisteminizin anlık görüntülerini alıp kolayca geri yükleyin."
+  },
+  {
+    "name": "Synaptic Paket Yöneticisi",
+    "package": "synaptic",
+    "category": "Sistem",
+    "icon": "📦",
+    "description": "APT paketlerini görsel arayüzle arayıp kurmak için gelişmiş araç."
+  },
+  {
+    "name": "Flatpak Desteği",
+    "package": "flatpak",
+    "category": "Sistem",
+    "icon": "🧩",
+    "description": "Flathub üzerinden binlerce ek uygulamayı kurabilmenizi sağlar."
+  },
+  {
+    "name": "Kdenlive",
+    "package": "kdenlive",
+    "category": "Multimedya",
+    "icon": "🎞️",
+    "description": "KDE'nin profesyonel video düzenleme yazılımı."
+  }
+]

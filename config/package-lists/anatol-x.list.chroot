@@ -24,5 +24,7 @@ calamares
 calamares-settings-debian
 os-prober
 
-# Python Tkinter (Hoş Geldin Ekranı İçin)
-python3-tk
+# PyQt6 Hoşgeldin Uygulaması ve Polkit (pkexec GUI istemleri için)
+python3-pyqt6
+policykit-1
+polkit-kde-agent-1

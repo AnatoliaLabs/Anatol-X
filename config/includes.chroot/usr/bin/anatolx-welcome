@@ -1,0 +1,3 @@
+#!/bin/sh
+# Anatol-X hoşgeldin uygulaması başlatıcı sarmalayıcı betiği.
+exec python3 -m welcome_app "$@"
