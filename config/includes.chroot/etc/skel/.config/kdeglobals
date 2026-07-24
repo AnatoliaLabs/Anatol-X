@@ -27,3 +27,6 @@ ForegroundPositive=128,255,128
 [General]
 ColorScheme=BreezeDark
 Name=Anatol-X Neon Dark
+
+[Wallpaper]
+Image=file:///usr/share/wallpapers/anatol-x-wallpaper.png
