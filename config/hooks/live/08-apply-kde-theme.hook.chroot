@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+echo "Anatol-X: KDE Neon Teması varsayılan olarak ayarlanıyor..."
+
+# Global KDE ayarlarını zorla
+mkdir -p /etc/xdg
+cat << 'EOF' > /etc/xdg/kdeglobals
+[General]
+ColorScheme=AnatolXNeon
+
+[KDE]
+LookAndFeelPackage=org.kde.breezedark.desktop
+EOF
