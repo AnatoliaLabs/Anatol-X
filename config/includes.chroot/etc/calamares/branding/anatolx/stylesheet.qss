@@ -53,3 +53,18 @@ QProgressBar::chunk {
     background-color: #00FFFF;
     border-radius: 3px;
 }
+
+QWidget {
+    color: #ffffff;
+    background-color: #1a1b26;
+}
+
+QTreeView, QListView, QTableView {
+    background-color: #16161e;
+    color: #ffffff;
+}
+
+QTreeView::item:selected {
+    background-color: #f70244; /* Logonun kırmızı tonu */
+    color: #ffffff;
+}
