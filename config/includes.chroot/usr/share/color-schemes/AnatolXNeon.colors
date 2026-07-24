@@ -1,0 +1,19 @@
+[General]
+Name=Anatol-X Neon
+ColorScheme=AnatolXNeon
+
+[Colors:Window]
+BackgroundNormal=22,22,30
+ForegroundNormal=255,255,255
+
+[Colors:Button]
+BackgroundNormal=36,40,59
+ForegroundNormal=0,255,255
+
+[Colors:Selection]
+BackgroundNormal=247,2,68
+ForegroundNormal=255,255,255
+
+[Colors:View]
+BackgroundNormal=26,27,38
+ForegroundNormal=0,255,255
