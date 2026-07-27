@@ -4,7 +4,7 @@ set -e
 echo "Anatol-X kimliği uygulanıyor..."
 
 cat > /etc/os-release <<EOF
-PRETTY_NAME="Anatol-X Linux (Alpha 2)"
+PRETTY_NAME="Anatol-X Linux (Alpha 2.2)"
 NAME="Anatol-X"
 VERSION_ID="26.0"
 VERSION="26.0 (Alpha)"
