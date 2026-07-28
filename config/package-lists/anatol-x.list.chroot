@@ -18,6 +18,8 @@ sudo
 nano
 curl
 wget
+grub-pc
+grub-efi-amd64
 
 # Masaüstü (KDE Plasma Tabanı)
 kde-plasma-desktop
