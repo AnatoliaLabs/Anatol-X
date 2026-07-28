@@ -23,7 +23,7 @@ grub-efi-amd64
 
 # Masaüstü (KDE Plasma Tabanı)
 kde-plasma-desktop
-plasma-login-manager
+sddm
 pipewire
 pipewire-audio-client-libraries
 
