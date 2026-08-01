@@ -1,46 +1,194 @@
-/* Anatol-X Neon Dark Theme için Calamares Stili */
+/* ============================================================
+   Anatol-X Neon Dark — Calamares stylesheet.qss
+   Tüm widget tipleri için açık renkler tanımlanır:
+   hiçbir metin arka planla aynı renkte kalamaz.
+   ============================================================ */
 
+/* ---- Genel ---- */
 QWidget {
     background-color: #1A1B26;
     color: #FFFFFF;
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+    font-size: 11pt;
+    selection-background-color: #00FFFF;
+    selection-color: #16161E;
 }
 
+QMainWindow, QDialog, QWizard {
+    background-color: #1A1B26;
+}
+
+QLabel {
+    background: transparent;
+    color: #FFFFFF;
+}
+
+/* ---- Sol kenar çubuğu (adımlar) ---- */
 #sidebarApp {
     background-color: #16161E;
 }
-
-QTreeView, QListView {
-    background-color: #1A1B26;
+#sidebarApp QLabel {
     color: #FFFFFF;
-    border: 1px solid #00FFFF;
-    border-radius: 4px;
 }
-
-QTreeView::item:selected, QListView::item:selected {
-    background-color: #00FFFF;
+#sidebarApp QLabel[role="current"] {
     color: #16161E;
+    background-color: #00FFFF;
+    border-radius: 3px;
+    padding: 2px 6px;
 }
 
+/* ---- Düğmeler (İleri / Geri / Kur) ---- */
 QPushButton {
     background-color: #00FFFF;
     color: #16161E;
-    border: none;
+    border: 1px solid #00FFFF;
     border-radius: 4px;
-    padding: 6px 12px;
+    padding: 6px 16px;
     font-weight: bold;
 }
-
 QPushButton:hover {
     background-color: #FF3366;
+    border-color: #FF3366;
+    color: #FFFFFF;
+}
+QPushButton:pressed {
+    background-color: #CC2952;
+}
+QPushButton:disabled {
+    background-color: #2A2B38;
+    border-color: #2A2B38;
+    color: #777788;
+}
+QPushButton:default {
+    border: 2px solid #FFFFFF;
+}
+
+/* ---- Listeler ve ağaçlar (paket seçimi, bölüm listesi) ---- */
+QTreeView, QListView, QTableView, QListWidget, QTreeWidget {
+    background-color: #16161E;
+    color: #FFFFFF;
+    border: 1px solid #00FFFF;
+    border-radius: 4px;
+    outline: none;
+}
+QTreeView::item, QListView::item, QTableView::item, QListWidget::item, QTreeWidget::item {
+    color: #FFFFFF;
+    padding: 4px;
+}
+QTreeView::item:selected, QListView::item:selected,
+QTableView::item:selected, QListWidget::item:selected, QTreeWidget::item:selected {
+    background-color: #00FFFF;
+    color: #16161E;
+}
+QTreeView::item:hover, QListView::item:hover,
+QTableView::item:hover, QListWidget::item:hover, QTreeWidget::item:hover {
+    background-color: #23253A;
     color: #FFFFFF;
 }
 
-QPushButton:disabled {
-    background-color: #333333;
-    color: #777777;
+QHeaderView::section {
+    background-color: #23253A;
+    color: #FFFFFF;
+    border: 1px solid #1A1B26;
+    padding: 4px;
 }
 
+/* ---- Açılır menüler (QComboBox) — "menüler belli olmuyor" sorunu ---- */
+QComboBox {
+    background-color: #16161E;
+    color: #FFFFFF;
+    border: 1px solid #00FFFF;
+    border-radius: 4px;
+    padding: 4px 8px;
+    min-height: 18px;
+}
+QComboBox:hover {
+    border-color: #FF3366;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 22px;
+    border-left: 1px solid #00FFFF;
+    background-color: #23253A;
+}
+QComboBox QAbstractItemView {
+    background-color: #16161E;
+    color: #FFFFFF;
+    border: 1px solid #00FFFF;
+    selection-background-color: #00FFFF;
+    selection-color: #16161E;
+    outline: none;
+}
+
+/* ---- Metin girişleri ---- */
+QLineEdit, QSpinBox, QDoubleSpinBox, QTextEdit, QPlainTextEdit {
+    background-color: #16161E;
+    color: #FFFFFF;
+    border: 1px solid #00FFFF;
+    border-radius: 4px;
+    padding: 4px 8px;
+    selection-background-color: #00FFFF;
+    selection-color: #16161E;
+}
+QLineEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus {
+    border: 2px solid #FF3366;
+}
+
+/* ---- Onay kutuları ve radyo düğmeleri ---- */
+QCheckBox, QRadioButton {
+    color: #FFFFFF;
+    background: transparent;
+    spacing: 6px;
+}
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+}
+QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
+    border: 2px solid #00FFFF;
+    background-color: #16161E;
+    border-radius: 3px;
+}
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+    border: 2px solid #00FFFF;
+    background-color: #00FFFF;
+    border-radius: 3px;
+}
+
+/* ---- Grup kutuları, sekmeler ---- */
+QGroupBox {
+    color: #FFFFFF;
+    border: 1px solid #23253A;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding-top: 8px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 4px;
+    color: #00FFFF;
+    font-weight: bold;
+}
+
+QTabWidget::pane {
+    border: 1px solid #23253A;
+    background-color: #1A1B26;
+}
+QTabBar::tab {
+    background-color: #16161E;
+    color: #FFFFFF;
+    padding: 6px 14px;
+    border: 1px solid #23253A;
+}
+QTabBar::tab:selected {
+    background-color: #00FFFF;
+    color: #16161E;
+    font-weight: bold;
+}
+
+/* ---- İlerleme çubuğu ---- */
 QProgressBar {
     border: 1px solid #333333;
     border-radius: 4px;
@@ -48,23 +196,56 @@ QProgressBar {
     background-color: #16161E;
     color: #FFFFFF;
 }
-
 QProgressBar::chunk {
     background-color: #00FFFF;
     border-radius: 3px;
 }
 
-QWidget {
-    color: #ffffff;
-    background-color: #1a1b26;
+/* ---- Kaydırma çubukları ---- */
+QScrollBar:vertical {
+    background: #16161E;
+    width: 12px;
+}
+QScrollBar::handle:vertical {
+    background: #00FFFF;
+    border-radius: 5px;
+    min-height: 24px;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+QScrollBar:horizontal {
+    background: #16161E;
+    height: 12px;
+}
+QScrollBar::handle:horizontal {
+    background: #00FFFF;
+    border-radius: 5px;
+    min-width: 24px;
+}
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    width: 0px;
 }
 
-QTreeView, QListView, QTableView {
-    background-color: #16161e;
-    color: #ffffff;
+/* ---- Mesaj kutuları, ipuçları ---- */
+QMessageBox {
+    background-color: #1A1B26;
+}
+QMessageBox QLabel {
+    color: #FFFFFF;
+}
+QToolTip {
+    background-color: #16161E;
+    color: #FFFFFF;
+    border: 1px solid #00FFFF;
+    padding: 4px;
 }
 
-QTreeView::item:selected {
-    background-color: #f70244; /* Logonun kırmızı tonu */
-    color: #ffffff;
+/* ---- Wizard sayfaları ---- */
+QWizardPage {
+    background-color: #1A1B26;
+}
+QStatusBar {
+    background-color: #16161E;
+    color: #FFFFFF;
 }

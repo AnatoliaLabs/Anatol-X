@@ -2,4 +2,24 @@
 set -e
 
 echo "Anatol-X: Gereksiz KDE paketleri kaldırılıyor..."
-apt-get purge -y plasma-welcome kwalletmanager
+
+# plasma-welcome  -> Plasma ilk açılış "Hoşgeldin" penceresi
+# kwalletmanager  -> KWallet Yönetici arayüzü
+# kwallet-pam/libpam-kwallet5 -> PAM üzerinden otomatik KWallet açma (şifre soran)
+# (Bazı paket isimleri sürüme göre değiştiği için hata olursa build bozulmasın)
+apt-get purge -y plasma-welcome kwalletmanager kwallet-pam libpam-kwallet5 2>/dev/null || true
+
+# KWallet'i kullanıcı seviyesinde tamamen devre dışı bırak
+mkdir -p /etc/skel/.config
+cat << 'EOF' > /etc/skel/.config/kwalletrc
+[Wallet]
+Enabled=false
+First Use=false
+EOF
+
+# Yeni kullanıcılar için varsayılan oturumda da otomatik başlamasın
+if [ -d /etc/xdg/autostart ]; then
+    rm -f /etc/xdg/autostart/pam_kwallet_init.desktop
+fi
+
+echo "Anatol-X: KDE Hoşgeldin ve KWallet devre dışı bırakıldı."

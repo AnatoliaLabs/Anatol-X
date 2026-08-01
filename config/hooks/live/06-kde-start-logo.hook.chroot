@@ -1,30 +1,62 @@
 #!/bin/sh
 set -e
 
-echo "Anatol-X: KDE Başlat menüsü logosu ayarlanıyor..."
+echo "Anatol-X: Plasma paneli ve varsayılan masaüstü düzeni ayarlanıyor..."
 
 # Kullanıcılar için varsayılan Plasma yapılandırma dizinini oluştur
 mkdir -p /etc/skel/.config
 
-# KDE Kickoff (Başlat) menüsünün ikonunu anatol-x-logo.jpg yap
+# Plasma 6 uyumlu tam düzen:
+#  - Containment 1: alttaki panel (Başlat + Görev Çubuğu + Sistem Tepsisi + Saat)
+#  - Containment 2: masaüstü (Anatol-X duvar kağıdı ile)
 cat << 'EOF' > /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc
-[ActionPlugins][0]
-RightButton;NoModifier=org.kde.contextmenu
-
 [Containments][1]
-ItemGeometriesHorizontal=
-ItemGeometriesVertical=
 activityId=
+formfactor=2
+immutability=0
+lastScreen=0
+location=4
 plugin=org.kde.panel
-wallpaperplugin=org.kde.image
+screen=0
+wallpaperplugin=
 
 [Containments][1][Applets][2]
 immutability=1
 plugin=org.kde.plasma.kickoff
 
 [Containments][1][Applets][2][Configuration][General]
-icon=/usr/share/pixmaps/anatol-x-logo.jpg
+icon=/usr/share/pixmaps/anatolx-logo.png
+
+[Containments][1][Applets][3]
+immutability=1
+plugin=org.kde.plasma.taskmanager
+
+[Containments][1][Applets][5]
+immutability=1
+plugin=org.kde.plasma.systemtray
+
+[Containments][1][Applets][7]
+immutability=1
+plugin=org.kde.plasma.digitalclock
+
+[Containments][2]
+activityId=
+formfactor=0
+immutability=0
+lastScreen=0
+location=0
+plugin=org.kde.desktopcontainment
+screen=0
+wallpaperplugin=org.kde.image
+
+[Containments][2][Wallpaper][org.kde.image][General]
+FillMode=2
+Image=file:///usr/share/backgrounds/anatolx/tux-radar.jpg
+PreviewImage=file:///usr/share/backgrounds/anatolx/tux-radar.jpg
+WallpaperMode=SingleImage
 EOF
 
 # Mevcut ayarları sistem genelinde uygulanabilir yap
 chmod -R 755 /etc/skel/.config
+
+echo "Anatol-X: Panel ve duvar kağıdı düzeni /etc/skel altına yazıldı."

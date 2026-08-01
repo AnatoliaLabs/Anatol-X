@@ -1,14 +1,35 @@
 #!/bin/sh
 set -e
 
-echo "Anatol-X: KDE Neon Teması varsayılan olarak ayarlanıyor..."
+echo "Anatol-X: KDE Neon teması varsayılan olarak ayarlanıyor..."
 
-# Global KDE ayarlarını zorla
+mkdir -p /etc/skel/.config
+
+# Kullanıcı seviyesindeki ayar (kazanan bu): AnatolXNeon renk şeması + Breeze Dark görünüm
+cat << 'EOF' > /etc/skel/.config/kdeglobals
+[General]
+ColorScheme=AnatolXNeon
+Name=Anatol-X Neon Dark
+
+[KDE]
+LookAndFeelPackage=org.kde.breezedark.desktop
+
+[Icons]
+Theme=breeze
+EOF
+
+# Sistem geneli yedek (kullanıcı config'i yoksa devreye girer)
 mkdir -p /etc/xdg
 cat << 'EOF' > /etc/xdg/kdeglobals
 [General]
 ColorScheme=AnatolXNeon
+Name=Anatol-X Neon Dark
 
 [KDE]
 LookAndFeelPackage=org.kde.breezedark.desktop
+
+[Icons]
+Theme=breeze
 EOF
+
+echo "Anatol-X: KDE teması /etc/skel ve /etc/xdg altına uygulandı."
