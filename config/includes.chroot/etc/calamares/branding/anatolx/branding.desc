@@ -3,15 +3,15 @@ componentName:  anatolx
 welcomeStyleCalamares: true
 welcomeExpandingLogo: true
 windowExpanding: normal
-windowSize: 800px splinter_code
+windowSize: "800px,520px"
 windowPlacement: center
 
 strings:
     productName:         Anatol-X Linux
     shortProductName:    Anatol-X
-    version:             26.0 Alpha 2
+    version:             26.0 Alpha 2.2
     shortVersion:        26.0
-    versionedName:       Anatol-X Linux 26.0 Alpha 2
+    versionedName:       Anatol-X Linux 26.0 Alpha 2.2
     shortVersionedName:  Anatol-X 26.0
     bootloaderEntryName: Anatol-X
     productUrl:          https://anatolialabs.github.io/Anatol-X
@@ -27,7 +27,7 @@ images:
 slideshow:               "show.qml"
 
 style:
-    sidebarBackground:    "#1A1B26"
-    sidebarText:          "#FFFFFF"
-    sidebarTextSelect:    "#00FFFF"
-    sidebarTextHighlight: "#FF3366"
+    SidebarBackground:        "#1A1B26"
+    SidebarText:              "#FFFFFF"
+    SidebarBackgroundCurrent: "#00FFFF"
+    SidebarTextCurrent:       "#16161E"

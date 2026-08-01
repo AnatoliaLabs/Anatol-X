@@ -25,6 +25,9 @@ ORG_DOMAIN = "anatolialabs.github.io"
 # taşıdığından (Qt bunu dahili olarak "%General" olarak kodlar ve okurken
 # beklenmedik sonuçlar verebilir), grup adı olarak "general" kullanılmıyor.
 SETTINGS_SHOW_ON_STARTUP = "app/show_on_startup"
+# Uygulamanın daha önce en az bir kez çalıştırılıp çalıştırılmadığını tutar.
+# İlk açılışta otomatik başlatma bir kez gösterilir, sonra kapatılır.
+SETTINGS_FIRST_RUN_DONE = "app/first_run_done"
 
 # --- Pencere Boyutları -----------------------------------------------------------
 WINDOW_MIN_WIDTH = 880
