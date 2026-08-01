@@ -19,8 +19,6 @@ sudo
 nano
 curl
 wget
-grub-pc
-grub-efi-amd64
 build-essential
 dkms
 
@@ -42,3 +40,6 @@ python3-pyqt6
 polkitd
 pkexec
 polkit-kde-agent-1
+grub2-common
+grub-pc-bin
+grub-efi-amd64-bin
