@@ -1,0 +1,54 @@
+ANATOL-X BUILD DUZELTMELERI - KURULUM (2 dakika)
+==================================================
+
+Ne duzeltiyor?
+  1. auto/config, auto/build, auto/clean artik CALISTIRILABILIR.
+     (Onceki build'de bu dosyalar calistirilamadigi icin lb config
+     parametresiz calisiyordu -> non-free-firmware depo bilgisi yoktu
+     -> TUM firmware paketleri bulunamadi -> build patladi.)
+  2. Paket listesi Debian 14 (forky) ile uyumlu hale getirildi:
+     - Ayrı firmware-* paketleri kaldirildi (forky'de yoklar; hepsi
+       tek firmware-linux paketinde). WiFi icin gereken tum firmware'ler
+       artik ISO'ya girecek.
+     - policykit-1 kaldirildi -> polkitd + pkexec (forky'de yeni isimler)
+     - firmware-amd-graphics eklendi (AMD GPU microcode)
+  3. GitHub Actions workflow'una chmod guvencesi eklendi.
+
+ADIM 1 - Depoya gir, main'e gec ve guncelle
+-------------------------------------------
+    cd ~/Anatol-X
+    git checkout main
+    git pull
+
+ADIM 2 - Yeni dal ac
+-------------------------------------------
+    git checkout -b alpha2.2-fixes2
+
+ADIM 3 - Dosyalari kopyala
+-------------------------------------------
+    cp -r ~/Masaustu/anatolx-fixes2/* ~/Anatol-X/
+
+    (Indirilenler'e actiysan: cp -r ~/Indirilenler/anatolx-fixes2/* ~/Anatol-X/)
+
+ADIM 4 - Calistirilabilirligi garantiye al
+-------------------------------------------
+    chmod +x auto/config auto/build auto/clean
+
+ADIM 5 - Commit ve push
+-------------------------------------------
+    git add -A
+    git commit -m "Build duzeltmeleri: auto scriptler executable, forky paket listesi"
+    git push origin alpha2.2-fixes2
+
+ADIM 6 - GitHub'da PR ac ve birles
+-------------------------------------------
+    Push ciktisindaki linke tikla (pull/new/alpha2.2-fixes2)
+    -> Create pull request -> Merge pull request -> Confirm merge
+
+ADIM 7 - Build'i tekrar baslat
+-------------------------------------------
+    Repo sayfasi -> Actions -> "Anatol-X ISO Build" -> Run workflow
+
+KONTROL (ADIM 3 sonrasi):
+    ls -la auto/
+    -> config, build, clean dosyalarinin hepsi -rwxr-xr-x olmali (x = calistirilabilir)

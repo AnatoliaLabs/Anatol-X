@@ -7,21 +7,14 @@ live-config-systemd
 systemd
 systemd-sysv
 network-manager
+# Debian 14 (forky): tüm donanım firmware'leri tek pakette toplandı.
+# Ayrı firmware-* paketleri (firmware-iwlwifi, firmware-realtek,
+# firmware-mediatek, firmware-atheros, firmware-brcm80211 vb.)
+# artık mevcut DEĞİL — hepsi firmware-linux içinde.
 firmware-linux
-firmware-linux-nonfree
-firmware-iwlwifi
-firmware-realtek
-firmware-atheros
-firmware-brcm80211
-firmware-misc-nonfree
-firmware-intelwimax
-firmware-libertas
-firmware-ti-connectivity
-firmware-zd1211
-firmware-mediatek
+firmware-amd-graphics
 wireless-regdb
 rfkill
-network-manager
 sudo
 nano
 curl
@@ -44,6 +37,8 @@ calamares-settings-debian
 os-prober
 
 # PyQt6 Hoşgeldin Uygulaması ve Polkit (pkexec GUI istemleri için)
+# Debian 14 (forky): policykit-1 paketi polkitd + pkexec olarak bölündü.
 python3-pyqt6
-policykit-1
+polkitd
+pkexec
 polkit-kde-agent-1
