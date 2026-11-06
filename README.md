@@ -72,7 +72,7 @@ sudo lb build
 
 **Yusuf Baran Kolsuzoğlu** ([@TheE1even11](https://github.com/TheE1even11)) - Founder & Core Team
 
-**Kağan Kırıktaş** ([@C-Stone-Labs])(https://github.com/C-Stone-Labs)) -Founder & Core Team
+**Kağan Kırıktaş** ([@C-Stone-Labs](https://github.com/C-Stone-Labs)) -Founder & Core Team
 
 **Cuma Turan Yenilmez** ([@cumaturanyenilmez-rgb](https://github.com/cumaturanyenilmez-rgb)) - Founder & Core Team
 
