@@ -70,9 +70,9 @@ sudo lb build
 
 ## 👥 Developers & Core Team
 
-**TheE1even11** ([@TheE1even11](https://github.com/TheE1even11)) - Founder & Core Team
+**Yusuf Baran Kolsuzoğlu** ([@TheE1even11](https://github.com/TheE1even11)) - Founder & Core Team
 
-**Kağan Kırıktaş** ([@kagan-labs](https://github.com/kagan-labs)) - Founder & Core Team
+**Emir Kağan Kırıktaş** ([@c-stone-labs])(https://github.com/C-Stone-Labs)) -Founder & Core Team
 
 **Cuma Turan Yenilmez** ([@cumaturanyenilmez-rgb](https://github.com/cumaturanyenilmez-rgb)) - Founder & Core Team
 
