@@ -49,6 +49,44 @@ jobs:
           cp assets/anatol-x-logo.png config/includes.chroot/etc/calamares/branding/anatolx/icon.png
           cp assets/anatol-x-logo.png config/includes.chroot/usr/share/pixmaps/anatolx-logo.png
           
+      - name: Paket Adlarını Doğrula (hızlı ön kontrol)
+        run: |
+          # 20+ dakikalık derlemeden ÖNCE tüm paket adlarını Debian arşivine
+          # karşı doğrular. "E: Unable to locate package ..." hatası artık
+          # derlemenin en başında, hangi paket olduğu açıkça yazılarak yakalanır.
+          # Ağ erişimi yoksa kontrol atlanır (sert hata değil).
+          set -e
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          mkdir -p "$tmp/lists/partial" "$tmp/cache/archives/partial" "$tmp/dpkg" "$tmp/apt.conf.d"
+          : > "$tmp/dpkg/status"
+
+          # İzole APT yapılandırması: çalışan sistemin APT durumuna dokunmaz.
+          cat > "$tmp/sources.list" <<EOF
+          deb [signed-by=/usr/share/keyrings/debian-archive-keyring.gpg] http://deb.debian.org/debian trixie main contrib non-free non-free-firmware
+          EOF
+          cat > "$tmp/apt.conf" <<EOF
+          Dir::State::lists "$tmp/lists";
+          Dir::State::status "$tmp/dpkg/status";
+          Dir::Cache "$tmp/cache";
+          Dir::Etc::sourcelist "$tmp/sources.list";
+          Dir::Etc::sourceparts "-";
+          Dir::Etc::main "$tmp/apt.conf";
+          Dir::Etc::parts "$tmp/apt.conf.d";
+          EOF
+          export APT_CONFIG="$tmp/apt.conf"
+
+          # DİKKAT: apt-get update, tüm indirmeler başarısız olsa bile 0 döner.
+          # Bu yüzden gerçekten paket indeksi indi mi diye lists/ içeriğine bakılır.
+          apt-get -o APT::Get::List-Cleanup="0" update || true
+          if ! ls "$tmp"/lists/*_Packages* >/dev/null 2>&1; then
+            echo "UYARI: Debian paket indeksi indirilemedi; doğrulama atlandı." >&2
+            echo "UYARI: (Ağ erişimi yok — derleme yine de devam ediyor.)" >&2
+            exit 0
+          fi
+
+          sh scripts/check-packages.sh
+
       - name: ISO'yu Derle
         run: |
           sudo lb config
