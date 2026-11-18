@@ -1,557 +1,1081 @@
-<!DOCTYPE html>
-<html lang="tr" class="lang-tr">
+<!doctype html>
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Anatol-X Linux - Maximum performance Linux distribution.">
-    <title>Anatol-X Linux</title>
-    
-    <script>
-        const userLang = navigator.language || navigator.userLanguage;
-        if (!userLang.startsWith('tr')) {
-            document.documentElement.classList.remove('lang-tr');
-            document.documentElement.classList.add('lang-en');
-        }
-    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Anatol-X: Debian 13 Trixie tabanlı, KDE Plasma ve Liquorix çekirdeğiyle geliştirilen masaüstü Linux dağıtımı. Çok yakında.">
+  <title>Anatol-X — Kendi yolunu aç</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-color: #04040c;
-            --text-main: #e2e8f0;
-            --neon-cyan: #00f0ff;
-            --neon-red: #ff003c;
-            --dark-surface: rgba(8, 8, 20, 0.85);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b12;
+      --line: rgba(180, 205, 220, .14);
+      --text: #edf3f6;
+      --muted: #9caab5;
+      --cyan: #69f4e3;
+      --max: 1160px;
+    }
 
-        /* Dil Gizleme Mantığı */
-        html.lang-tr .en { display: none !important; }
-        html.lang-en .tr { display: none !important; }
+    * { box-sizing: border-box; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+    html { scroll-behavior: smooth; }
 
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            position: relative;
-        }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
-        /* Dinamik Fare Işığı */
-        #cursor-glow {
-            position: fixed;
-            top: -150px;
-            left: -150px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: opacity 0.3s;
-        }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img { max-width: 100%; display: block; }
 
-        /* Siber Izgara Arka Planı */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 200vw; height: 200vh;
-            background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridMove 15s linear infinite;
-            z-index: -1;
-            pointer-events: none;
-        }
+    ::selection {
+      background: var(--cyan);
+      color: #07100f;
+    }
 
-        @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(40px) translateZ(-200px); }
-        }
+    .en { display: none; }
+    html[lang="en"] .tr { display: none; }
+    html[lang="en"] .en { display: revert; }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: #1a1a3a; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+    .wrap {
+      width: min(calc(100% - 48px), var(--max));
+      margin: auto;
+    }
 
-        /* GÜNCELLENEN NAVİGASYON: Üstteki bannerlar ile çakışmayan Akıllı Sticky Düzeni */
-        nav {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(4, 4, 12, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 240, 255, 0.15);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+    .skip {
+      position: absolute;
+      z-index: 50;
+      top: -100px;
+      left: 12px;
+      background: var(--cyan);
+      color: #07100f;
+      padding: 8px 14px;
+    }
 
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
+    .skip:focus { top: 12px; }
 
-        .nav-logo-img {
-            height: 42px;
-            width: 42px;
-            object-fit: cover;
-            border-radius: 4px;
-            border: 1px solid var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-        }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
 
-        .nav-logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: #fff;
-            font-weight: 900;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-        }
+    header {
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 5;
+      background: rgba(8, 11, 18, .9);
+    }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+    }
 
-        .nav-links a {
-            color: #a0aec0;
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: var(--transition);
-            text-transform: uppercase;
-            font-family: 'Orbitron', sans-serif;
-            position: relative;
-        }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--neon-cyan);
-            transition: var(--transition);
-        }
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
 
-        .nav-links a:hover::after { width: 100%; }
-        .nav-links a:hover { color: #fff; text-shadow: 0 0 8px var(--neon-cyan); }
+    .brand i {
+      color: var(--cyan);
+      font-style: normal;
+    }
 
-        .lang-btn {
-            background: transparent;
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 5px 10px;
-            margin-left: 30px;
-            font-family: 'Fira Code', monospace;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-        .lang-btn:hover {
-            background: var(--neon-cyan);
-            color: #000;
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: #b9c5cd;
+      font-size: 13px;
+      font-weight: 650;
+    }
 
-        /* Hero Alanı (Dolgular sticky menüye göre optimize edildi) */
-        header {
-            min-height: calc(100vh - 80px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-            background: radial-gradient(circle at center, rgba(4,4,12,0.4) 0%, var(--bg-color) 70%);
-        }
+    .nav-links a:hover { color: var(--cyan); }
 
-        .hero-logo-large {
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            margin-bottom: 25px;
-            border: 2px solid var(--neon-cyan);
-            border-radius: 12px;
-            animation: cyberPulse 3s infinite alternate ease-in-out;
-        }
+    .nav-end {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
 
-        @keyframes cyberPulse {
-            0% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); border-color: var(--neon-cyan); transform: scale(1); }
-            100% { box-shadow: 0 0 35px rgba(255, 0, 60, 0.5); border-color: var(--neon-red); transform: scale(1.02); }
-        }
+    .lang-button {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: #c6d3d9;
+      border-radius: 6px;
+      cursor: pointer;
+      padding: 8px 11px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
 
-        .glitch-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: white;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 0px var(--neon-cyan), -2px -2px 0px var(--neon-red);
-            transition: var(--transition);
-        }
+    .nav-cta {
+      border: 1px solid #495760;
+      border-radius: 6px;
+      padding: 8px 13px;
+      font-size: 12px;
+      font-weight: 750;
+    }
 
-        .glitch-text:hover {
-            text-shadow: -3px -3px 0px var(--neon-cyan), 3px 3px 0px var(--neon-red);
-            transform: skewX(-5deg);
-        }
+    .nav-cta:hover,
+    .lang-button:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
 
-        .subtitle {
-            font-size: 1.4rem;
-            color: #94a3b8;
-            max-width: 750px;
-            line-height: 1.6;
-        }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(ellipse at 80% 46%, rgba(18, 81, 84, .25), transparent 41%),
+        radial-gradient(ellipse at 0 95%, rgba(69, 24, 40, .17), transparent 40%);
+    }
 
-        /* İstatistikler */
-        .live-stats {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 40px;
-            width: 100%;
-            max-width: 800px;
-        }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(162, 204, 211, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(162, 204, 211, .035) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: linear-gradient(to right, transparent 10%, #000 100%);
+      pointer-events: none;
+    }
 
-        .stat-box {
-            flex: 1 1 200px;
-            background: rgba(15, 15, 35, 0.6);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Fira Code', monospace;
-            text-align: center;
-            transition: var(--transition);
-        }
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr .95fr;
+      align-items: center;
+      min-height: 628px;
+      gap: 35px;
+      padding: 84px 0 76px;
+    }
 
-        .stat-box:hover { border-color: var(--neon-red); transform: translateY(-3px); }
-        .stat-box .title { color: #64748b; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;}
-        .stat-box .value { color: var(--neon-cyan); font-weight: bold; font-size: 1rem; }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
 
-        /* Butonlar */
-        .btn-group { margin-top: 45px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 14px var(--cyan);
+    }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: var(--transition);
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            white-space: nowrap;
-        }
+    h1 {
+      font-size: clamp(50px, 6.7vw, 84px);
+      line-height: 1.02;
+      letter-spacing: -.067em;
+      margin: 25px 0 23px;
+      font-weight: 850;
+    }
 
-        .btn-primary {
-            background: var(--neon-red);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
-        }
+    h1 em {
+      color: var(--cyan);
+      font-style: normal;
+    }
 
-        .btn-primary:hover {
-            background: #d40032;
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.8);
-        }
+    .lead {
+      max-width: 540px;
+      color: #aebcc6;
+      font-size: 17px;
+      line-height: 1.8;
+      margin: 0;
+    }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan);
-        }
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
 
-        .btn-secondary:hover {
-            background: var(--neon-cyan);
-            color: #000;
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
-            transform: scale(1.05);
-        }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      min-height: 49px;
+      padding: 0 19px;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      font-weight: 800;
+      font-size: 13px;
+      transition: .18s ease;
+    }
 
-        /* Özellikler */
-        section { padding: 100px 10%; position: relative; background: var(--bg-color); z-index: 2; border-top: 1px solid rgba(255,255,255,0.05); }
-        
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: white; }
-        .section-desc { color: #64748b; font-size: 1.1rem; margin-top: 10px; }
+    .btn-primary {
+      background: var(--cyan);
+      color: #09201e;
+    }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
+    .btn-primary:hover {
+      background: #a2fff3;
+      transform: translateY(-2px);
+    }
 
-        .feature-card {
-            background: var(--dark-surface);
-            padding: 40px 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-top: 3px solid var(--neon-cyan);
-            border-radius: 6px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
+    .btn-secondary {
+      border-color: #46535d;
+      color: #dce5e9;
+    }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: all 0.5s;
-        }
+    .btn-secondary:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
 
-        .feature-card:hover::before { left: 100%; }
+    .hero-note {
+      margin-top: 22px;
+      font-size: 12px;
+      color: #798a96;
+    }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            border-top-color: var(--neon-red);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 60, 0.1);
-        }
+    .hero-note span { color: #b0c0c9; }
 
-        .feature-card h3 { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 15px; color: #fff; }
-        .feature-card p { font-size: 1.1rem; color: #94a3b8; line-height: 1.6; }
+    .hero-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 440px;
+    }
 
-        /* İndirme Bölümü */
-        #download {
-            background: linear-gradient(180deg, var(--bg-color) 0%, rgba(10,10,20,1) 100%);
-            text-align: center;
-        }
+    .orbit {
+      width: min(100%, 440px);
+      aspect-ratio: 1;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(122, 236, 228, .16);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 115, 113, .12), transparent 68%);
+    }
 
-        .download-box {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 50px 30px;
-            background: rgba(10, 10, 25, 0.8);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-        }
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(122, 236, 228, .11);
+    }
 
-        .iso-meta {
-            font-family: 'Fira Code', monospace;
-            background: #05050a;
-            padding: 15px;
-            border-radius: 6px;
-            color: #64748b;
-            font-size: 0.9rem;
-            margin: 20px 0 30px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .iso-meta span { color: var(--neon-cyan); }
+    .orbit::before { inset: 38px; }
 
-        footer {
-            background: #020205;
-            padding: 40px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 0, 60, 0.2);
-            font-size: 1rem;
-            color: #64748b;
-            position: relative;
-            z-index: 2;
-        }
+    .orbit::after {
+      inset: -25px;
+      border-style: dashed;
+      opacity: .5;
+    }
 
-        footer a { color: #fff; text-decoration: none; font-weight: 600; }
-        footer a:hover { color: var(--neon-red); }
+    .orbit img {
+      width: 73%;
+      filter: drop-shadow(0 0 32px rgba(38, 222, 212, .14));
+      position: relative;
+    }
 
-        @media (max-width: 768px) {
-            .glitch-text { font-size: 2.5rem; }
-            nav { padding: 15px 20px; }
-            .nav-links a { display: none; }
-            .hero-logo-large { width: 140px; height: 140px; }
-            .btn { width: 100%; }
-        }
-    </style>
+    .orbit-tag {
+      position: absolute;
+      bottom: 27px;
+      right: -3px;
+      border: 1px solid rgba(101, 244, 228, .22);
+      background: #101b24;
+      color: #b7e9e5;
+      padding: 8px 12px;
+      font: 10px/1.2 ui-monospace, monospace;
+      letter-spacing: .13em;
+    }
+
+    .plus {
+      position: absolute;
+      color: var(--cyan);
+      font: 18px ui-monospace, monospace;
+      opacity: .7;
+    }
+
+    .plus.one { left: 4%; top: 16%; }
+    .plus.two { right: 7%; bottom: 14%; }
+
+    .strip {
+      border-bottom: 1px solid var(--line);
+      background: #0b1019;
+    }
+
+    .strip-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 0;
+      color: #889ba7;
+      font: 10px ui-monospace, SFMono-Regular, Consolas, monospace;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .strip-inner strong {
+      color: #d6e1e5;
+      font-weight: 700;
+    }
+
+    .strip-inner .slash {
+      color: var(--cyan);
+      padding-right: 7px;
+    }
+
+    section { scroll-margin-top: 30px; }
+
+    .section { padding: 105px 0; }
+
+    .section-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section-label {
+      color: var(--cyan);
+      font: 700 11px ui-monospace, monospace;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .section h2 {
+      font-size: clamp(32px, 4.2vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -.045em;
+      margin: 15px 0 0;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 430px;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .card {
+      min-height: 230px;
+      padding: 29px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(21, 31, 44, .6), rgba(12, 17, 26, .4));
+    }
+
+    .card-number {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font: 11px ui-monospace, monospace;
+      color: #788a95;
+      letter-spacing: .08em;
+    }
+
+    .card-number b {
+      color: var(--cyan);
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    .card h3 {
+      font-size: 19px;
+      letter-spacing: -.025em;
+      margin: 38px 0 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .inside {
+      background: #0b1019;
+      border-block: 1px solid var(--line);
+    }
+
+    .inside-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .inside p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 500px;
+    }
+
+    .specs { border-top: 1px solid var(--line); }
+
+    .spec {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 19px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .spec > span:first-child { color: #92a2ad; }
+
+    .spec strong {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .fineprint {
+      font-size: 12px !important;
+      color: #81919d !important;
+      margin-top: 22px;
+    }
+
+    .release { padding: 105px 0; }
+
+    .release-box {
+      border: 1px solid rgba(105, 244, 227, .24);
+      background:
+        radial-gradient(ellipse at 100% 0, rgba(42, 147, 137, .16), transparent 47%),
+        #101720;
+      padding: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .release-box::after {
+      content: "X";
+      position: absolute;
+      font-size: 240px;
+      font-weight: 900;
+      line-height: 1;
+      right: 15%;
+      top: -55px;
+      color: rgba(103, 243, 227, .035);
+      pointer-events: none;
+    }
+
+    .release h2 {
+      font-size: clamp(35px, 4vw, 50px);
+      line-height: 1.1;
+      letter-spacing: -.045em;
+      margin: 14px 0;
+    }
+
+    .release p {
+      color: #a4b6bf;
+      max-width: 610px;
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .release-action {
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .release-action .status {
+      display: block;
+      color: #95aaaf;
+      font: 10px ui-monospace, monospace;
+      text-align: center;
+      margin-top: 12px;
+      letter-spacing: .08em;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 35px 0;
+      color: #82929d;
+      font-size: 12px;
+    }
+
+    .footer-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+    }
+
+    .footer-links a:hover { color: var(--cyan); }
+
+    .footer-brand {
+      color: #dae5ea;
+      font-weight: 800;
+      letter-spacing: .07em;
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        min-height: auto;
+      }
+
+      .hero-art { min-height: 340px; }
+      .nav-links { gap: 15px; }
+      .inside-grid { gap: 35px; }
+      .release-box { padding: 38px; }
+      .orbit-tag { right: 0; }
+    }
+
+    @media (max-width: 650px) {
+      .wrap { width: min(calc(100% - 36px), var(--max)); }
+      .nav { height: 66px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+
+      .hero-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 72px 0 52px;
+        gap: 14px;
+      }
+
+      .hero-art {
+        min-height: 300px;
+        padding: 20px 35px;
+      }
+
+      .orbit { max-width: 280px; }
+      .orbit::after { inset: -15px; }
+      .orbit-tag { bottom: 10px; }
+
+      .strip-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        font-size: 9px;
+      }
+
+      .section { padding: 76px 0; }
+      .section-top { display: block; }
+      .section-intro { margin-top: 18px; }
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: 0; }
+      .card h3 { margin-top: 24px; }
+
+      .inside-grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .release { padding: 76px 0; }
+      .release-box { display: block; padding: 30px; }
+      .release-action { margin-top: 26px; }
+      .release-action .btn { width: 100%; }
+
+      .footer-grid {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-links { flex-wrap: wrap; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+    }
+  </style>
 </head>
+
 <body>
+  <a class="skip" href="#main">
+    <span class="tr">İçeriğe geç</span>
+    <span class="en">Skip to content</span>
+  </a>
 
-    <div id="cursor-glow"></div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Anatol-X">
+        <img src="assets/anatol-x-logo.png" alt="">
+        <span>ANATOL<i>-</i>X</span>
+      </a>
 
-    <nav>
-        <a href="#" class="nav-brand">
-            <img src="assets/anatol-x-logo.png" alt="Anatol-X Logo" class="nav-logo-img">
-            <span class="nav-logo-text">ANATOL-X</span>
+      <nav class="nav-links" aria-label="Ana menü / Main menu">
+        <a href="#ozellikler">
+          <span class="tr">Özellikler</span>
+          <span class="en">Features</span>
         </a>
-        <div class="nav-links">
-            <a href="#about"><span class="tr">Genel Bakış</span><span class="en">Overview</span></a>
-            <a href="#features"><span class="tr">Performans</span><span class="en">Performance</span></a>
-            <a href="#download"><span class="tr">İndirme</span><span class="en">Download</span></a>
-            <button class="lang-btn" onclick="toggleLanguage()">TR/EN</button>
-        </div>
-    </nav>
 
-    <header id="about">
-        <img src="assets/anatol-x-logo.png" alt="Anatol-X Logosu" class="hero-logo-large">
-        <h1 class="glitch-text">
-            <span class="tr">MAKSİMUM PERFORMANS</span>
-            <span class="en">MAXIMUM PERFORMANCE</span>
-        </h1>
-        <p class="subtitle">
-            <span class="tr">Debian Testing (Forky) tabanlı mimari ve Liquorix Kernel optimizasyonlarıyla donatılmış, oyun, geliştirme ve günlük iş yükleri için tasarlanmış yeni nesil işletim sistemi.</span>
-            <span class="en">Next-generation operating system designed for gaming, development, and daily workloads, equipped with Debian Testing (Forky) architecture and Liquorix Kernel optimizations.</span>
-        </p>
-        
-        <div class="live-stats">
-            <div class="stat-box">
-                <div class="title"><span class="tr">Çekirdek</span><span class="en">Kernel</span></div>
-                <div class="value">Liquorix Zen-Tuning</div>
-            </div>
-            <div class="stat-box">
-                <div class="title"><span class="tr">Taban</span><span class="en">Base</span></div>
-                <div class="value">Debian Testing (amd64)</div>
-            </div>
-            <div class="stat-box">
-                <div class="title"><span class="tr">Derleme</span><span class="en">Build</span></div>
-                <div class="value">Live-build Pipeline</div>
-            </div>
-        </div>
+        <a href="#temel">
+          <span class="tr">Teknoloji</span>
+          <span class="en">Technology</span>
+        </a>
 
-        <div class="btn-group">
-            <a href="#download" class="btn btn-primary">
-                <span class="tr">İSO İndir</span><span class="en">Download ISO</span>
+        <a href="#durum">
+          <span class="tr">Yayın durumu</span>
+          <span class="en">Release status</span>
+        </a>
+      </nav>
+
+      <div class="nav-end">
+        <button
+          class="lang-button"
+          type="button"
+          id="language"
+          aria-label="Switch to English"
+        >EN</button>
+
+        <a class="nav-cta" href="https://github.com/AnatoliaLabs/Anatol-X">
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span class="tr">Anatolia Labs · Geliştirme aşamasında</span>
+            <span class="en">Anatolia Labs · In development</span>
+          </div>
+
+          <h1>
+            <span class="tr">Kendi yolunu<br><em>aç.</em></span>
+            <span class="en">Make it<br><em>your own.</em></span>
+          </h1>
+
+          <p class="lead">
+            <span class="tr">
+              Güçlü bir temel, sana ait bir masaüstü. Anatol-X; oyun,
+              üretkenlik ve günlük kullanım için geliştirilen Debian tabanlı
+              bir Linux deneyimi.
+            </span>
+
+            <span class="en">
+              A solid foundation, a desktop that feels like yours.
+              Anatol-X is a Debian-based Linux experience in development
+              for gaming, productivity, and everyday use.
+            </span>
+          </p>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="#durum">
+              <span class="tr">Yayın durumunu gör</span>
+              <span class="en">See release status</span>
+              <span aria-hidden="true">↗</span>
             </a>
-            <a href="https://github.com/AnatoliaLabs/Anatol-X" target="_blank" class="btn btn-secondary">
-                <span class="tr">Kaynak Kod</span><span class="en">Source Code</span>
+
+            <a class="btn btn-secondary" href="#ozellikler">
+              <span class="tr">Anatol-X’i keşfet</span>
+              <span class="en">Explore Anatol-X</span>
+              <span aria-hidden="true">↓</span>
             </a>
-        </div>
-    </header>
+          </div>
 
-    <section id="features">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="tr">Teknik Altyapı</span><span class="en">Technical Infrastructure</span>
-            </h2>
-            <p class="section-desc">
-                <span class="tr">Hız için optimize edilmiş modern bileşenler.</span>
-                <span class="en">Modern components optimized for speed.</span>
-            </p>
+          <div class="hero-note">
+            <span class="tr">
+              <span>01 /</span> Henüz herkese açık bir kararlı sürüm yok.
+            </span>
+
+            <span class="en">
+              <span>01 /</span> A public stable release is not available yet.
+            </span>
+          </div>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>
-                    <span class="tr">Liquorix Entegrasyonu</span><span class="en">Liquorix Integration</span>
-                </h3>
-                <p>
-                    <span class="tr">Zen Interactive Tuning, BBR2 tıkanıklık kontrolü ve yüksek çözünürlüklü zamanlayıcılar (HRTIMER) ile minimum gecikme.</span>
-                    <span class="en">Minimum latency with Zen Interactive Tuning, BBR2 congestion control, and high-resolution timers (HRTIMER).</span>
-                </p>
-            </div>
-            <div class="feature-card">
-                <h3>
-                    <span class="tr">Bellek Yönetimi</span><span class="en">Memory Management</span>
-                </h3>
-                <p>
-                    <span class="tr">Multi-Generational LRU ve LZ4 sıkıştırmalı gömülü Swap (zswap) sayesinde ağır çoklu görevlerde kilitlenmeleri önler.</span>
-                    <span class="en">Prevents freezes under heavy multitasking with Multi-Generational LRU and LZ4 compressed embedded Swap (zswap).</span>
-                </p>
-            </div>
-            <div class="feature-card">
-                <h3>
-                    <span class="tr">Live-Build Düzeni</span><span class="en">Live-Build System</span>
-                </h3>
-                <p>
-                    <span class="tr">Tamamen saf Debian standartlarında, gereksiz servislerden arındırılmış şeffaf ve otomatik derlenen dağıtım yapısı.</span>
-                    <span class="en">Transparent and auto-compiled distribution structure completely in pure Debian standards, stripped of unnecessary services.</span>
-                </p>
-            </div>
-            <div class="feature-card">
-                <h3>
-                    <span class="tr">Masaüstü Seçici</span><span class="en">Desktop Selector</span>
-                </h3>
-                <p>
-                    <span class="tr">Calamares yükleyicisi üzerinden kurulum esnasında dilediğiniz arayüzü seçin. Önceden yapılandırılmış dinamik neon temalar.</span>
-                    <span class="en">Choose your desired interface during installation via Calamares. Pre-configured dynamic neon themes included.</span>
-                </p>
-            </div>
+        <div class="hero-art" aria-hidden="true">
+          <span class="plus one">+</span>
+
+          <div class="orbit">
+            <img src="assets/anatol-x-logo.png" alt="">
+            <div class="orbit-tag">ANATOL-X / 001</div>
+          </div>
+
+          <span class="plus two">+</span>
         </div>
+      </div>
     </section>
 
-    <section id="download">
-        <div class="download-box">
-            <h2 style="font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 10px; color: white;">
-                <span class="tr">Anatol-X Edin</span><span class="en">Get Anatol-X</span>
-            </h2>
-            <p style="color: #94a3b8;">
-                <span class="tr">Donanımınızın gerçek gücünü ortaya çıkarmak için kararlı yapıyı kurun.</span>
-                <span class="en">Install the stable build to unleash the true power of your hardware.</span>
-            </p>
-            
-            <div class="iso-meta">
-                <span class="tr">DOSYA:</span><span class="en">FILE:</span> <span>Anatol-X-Alpha-2.2.iso</span> | <span class="tr">MİMARİ:</span><span class="en">ARCH:</span> <span>amd64</span>
-            </div>
-            
-            <a href="https://sourceforge.net/projects/anatolialabs/files/latest/download" class="btn btn-primary" style="font-size: 1.4rem; padding: 20px 60px; width: 100%;">
-                <span class="tr">İNDİR</span><span class="en">DOWNLOAD</span>
-            </a>
-            
-            <p style="font-family: 'Fira Code', monospace; font-size: 0.85rem; color: #475569; margin-top: 25px;">
-                <span class="tr">* Kurulum medyasına yazdırırken Ventoy veya BalenaEtcher kullanılması önerilir. İndirme sonrası sha1 yada md5 kontrolü yapın.</span>
-                <span class="en">* Using Ventoy or BalenaEtcher is recommended for flashing. Do a sha1 or md5 check after downloading.</span>
-            </p>
+    <div class="strip">
+      <div class="wrap strip-inner">
+        <div><span class="slash">/</span> BASE <strong>DEBIAN 13</strong></div>
+        <div><span class="slash">/</span> DESKTOP <strong>KDE PLASMA 6</strong></div>
+        <div><span class="slash">/</span> KERNEL <strong>LIQUORIX</strong></div>
+        <div><span class="slash">/</span> ARCH <strong>AMD64</strong></div>
+      </div>
+    </div>
+
+    <section class="section wrap" id="ozellikler">
+      <div class="section-top">
+        <div>
+          <div class="section-label">
+            <span class="tr">01 / Neden Anatol-X?</span>
+            <span class="en">01 / Why Anatol-X?</span>
+          </div>
+
+          <h2>
+            <span class="tr">Temeli sağlam.<br>Yolu açık.</span>
+            <span class="en">Built on a solid<br>foundation.</span>
+          </h2>
         </div>
+
+        <p class="section-intro">
+          <span class="tr">
+            Tanıdık bir altyapıyı, kişiselleştirilebilir bir masaüstü
+            ve Anatolia Labs araçlarıyla bir araya getiriyoruz.
+          </span>
+
+          <span class="en">
+            We bring a familiar foundation together with a customizable
+            desktop and tools from Anatolia Labs.
+          </span>
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card-number"><span>01 / BASE</span><b>↗</b></div>
+          <h3>Debian 13 Trixie</h3>
+          <p>
+            <span class="tr">
+              Debian’ın kararlı sürümünü temel alan bir sistem.
+              Testing değil; Trixie tabanlı.
+            </span>
+
+            <span class="en">
+              Built on Debian’s stable release.
+              Based on Trixie, not Debian Testing.
+            </span>
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-number"><span>02 / DESKTOP</span><b>✳</b></div>
+          <h3>KDE Plasma 6</h3>
+          <p>
+            <span class="tr">
+              Görünümü ve çalışma alanını kendine göre düzenleyebileceğin
+              modern bir masaüstü. Varsayılan oturum Wayland.
+            </span>
+
+            <span class="en">
+              A modern, customizable desktop.
+              The default session uses Wayland.
+            </span>
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-number"><span>03 / KERNEL</span><b>⌁</b></div>
+          <h3>Liquorix</h3>
+          <p>
+            <span class="tr">
+              Yeni amd64 ISO’da, masaüstü odaklı Liquorix çekirdeği
+              ve eşleşen başlık paketleri kullanılıyor.
+            </span>
+
+            <span class="en">
+              The new amd64 ISO uses the desktop-oriented Liquorix
+              kernel and matching headers.
+            </span>
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-number"><span>04 / BROWSER</span><b>↗</b></div>
+          <h3>Anatolium</h3>
+          <p>
+            <span class="tr">
+              Firefox ESR üzerine kurulu, Anatolia Labs tarafından
+              geliştirilen arayüze sahip sistem tarayıcısı.
+            </span>
+
+            <span class="en">
+              A system browser built on Firefox ESR with an interface
+              developed by Anatolia Labs.
+            </span>
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-number"><span>05 / UPDATES</span><b>◇</b></div>
+          <h3>
+            <span class="tr">İmzalı paketler</span>
+            <span class="en">Signed packages</span>
+          </h3>
+
+          <p>
+            <span class="tr">
+              Anatol-X uygulamaları ve sistem paketleri, imza doğrulaması
+              kullanılan APT deposu üzerinden dağıtılıyor.
+            </span>
+
+            <span class="en">
+              Anatol-X applications and system packages are distributed
+              through a signature-verified APT repository.
+            </span>
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="card-number"><span>06 / IDENTITY</span><b>✦</b></div>
+          <h3>
+            <span class="tr">Kendine özgü</span>
+            <span class="en">Made to feel distinct</span>
+          </h3>
+
+          <p>
+            <span class="tr">
+              Anatol-X kimliği, masaüstünden canlı ISO ve kurulu sistem
+              için hazırlanan GRUB temasına uzanıyor.
+            </span>
+
+            <span class="en">
+              Anatol-X’s identity extends from the desktop to the GRUB
+              theme prepared for the live ISO and installed system.
+            </span>
+          </p>
+        </article>
+      </div>
     </section>
 
-    <footer>
-        <p>
-            <span class="tr">Resmi İletişim:</span><span class="en">Official Contact:</span> 
-            <a href="mailto:anatoliaosf@proton.me">anatoliaosf@proton.me</a>
-        </p>
-        <p style="margin-top: 15px; font-size: 0.9rem;">
-            <span class="tr">Açık kaynaklı geliştirme faaliyetlerimiz <a href="https://github.com/AnatoliaLabs/Anatol-X" target="_blank">GitHub</a> üzerinde yürütülmektedir.</span>
-            <span class="en">Our open-source development activities are conducted on <a href="https://github.com/AnatoliaLabs/Anatol-X" target="_blank">GitHub</a>.</span>
-            <br>
-            © 2026 Anatol-X Linux.
-        </p>
-    </footer>
+    <section class="section inside" id="temel">
+      <div class="wrap inside-grid">
+        <div>
+          <div class="section-label">
+            <span class="tr">02 / İçinde neler var?</span>
+            <span class="en">02 / Under the hood</span>
+          </div>
 
-    <script>
-        function toggleLanguage() {
-            const html = document.documentElement;
-            if (html.classList.contains('lang-tr')) {
-                html.classList.remove('lang-tr');
-                html.classList.add('lang-en');
-            } else {
-                html.classList.remove('lang-en');
-                html.classList.add('lang-tr');
-            }
-        }
+          <h2>
+            <span class="tr">Detaylar<br>önemlidir.</span>
+            <span class="en">Details<br>matter.</span>
+          </h2>
 
-        const glow = document.getElementById('cursor-glow');
-        document.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX - 150 + 'px';
-            glow.style.top = e.clientY - 150 + 'px';
-        });
-    </script>
+          <p>
+            <span class="tr">
+              Anatol-X hâlâ geliştiriliyor. Aşağıdaki bilgiler mevcut
+              ISO yapılandırmasını anlatır; yayımlanmadan önce değişebilir.
+            </span>
 
-    <script src="https://keepandroidopen.org/banner.js?link=https://keepandroidopen.org&hidebutton=off"></script>
+            <span class="en">
+              Anatol-X is still in development. These details describe
+              the current ISO configuration and may change before release.
+            </span>
+          </p>
+
+          <p class="fineprint">
+            <span class="tr">
+              Liquorix çekirdeği standart Secure Boot için imzalı değildir;
+              uygun özel imzalama olmadan Secure Boot’u kapatmak gerekebilir.
+              Donanım ve sürücü uyumluluğu test edilmelidir.
+            </span>
+
+            <span class="en">
+              The Liquorix kernel is not signed for standard Secure Boot;
+              disabling Secure Boot may be necessary without a suitable
+              custom signing setup. Hardware and driver compatibility
+              should be tested.
+            </span>
+          </p>
+        </div>
+
+        <div class="specs">
+          <div class="spec">
+            <span>
+              <span class="tr">Dağıtım temeli</span>
+              <span class="en">Distribution base</span>
+            </span>
+            <strong>Debian 13 “Trixie”</strong>
+          </div>
+
+          <div class="spec">
+            <span>
+              <span class="tr">Masaüstü</span>
+              <span class="en">Desktop</span>
+            </span>
+            <strong>KDE Plasma 6 / Wayland</strong>
+          </div>
+
+          <div class="spec">
+            <span>
+              <span class="tr">Çekirdek</span>
+              <span class="en">Kernel</span>
+            </span>
+            <strong>Liquorix</strong>
+          </div>
+
+          <div class="spec">
+            <span>
+              <span class="tr">Mimari</span>
+              <span class="en">Architecture</span>
+            </span>
+            <strong>amd64 / x86-64</strong>
+          </div>
+
+          <div class="spec">
+            <span>
+              <span class="tr">Paket sistemi</span>
+              <span class="en">Packages</span>
+            </span>
+            <strong>APT / .deb</strong>
+          </div>
+
+          <div class="spec">
+            <span>
+              <span class="tr">Durum</span>
+              <span class="en">Status</span>
+            </span>
+            <strong>
+              <span class="tr">Geliştiriliyor</span>
+              <span class="en">In development</span>
+            </strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="release wrap" id="durum">
+      <div class="release-box">
+        <div>
+          <div class="eyebrow">
+            <span class="tr">Sırada ne var?</span>
+            <span class="en">What’s next?</span>
+          </div>
+
+          <h2>
+            <span class="tr">Çok yakında.</span>
+            <span class="en">Coming soon.</span>
+          </h2>
+
+          <p>
+            <span class="tr">
+              Anatol-X üzerinde çalışmaya devam ediyoruz. Herkese açık
+              sürüm hazır olduğunda indirme bilgilerini burada paylaşacağız.
+              Kesin bir yayın tarihi henüz belirlenmedi.
+            </span>
+
+            <span class="en">
+              We’re continuing to build Anatol-X. Download information
+              will appear here when the public release is ready.
+              No release date has been announced yet.
+            </span>
+          </p>
+        </div>
+
+        <div class="release-action">
+          <a class="btn btn-primary" href="https://github.com/AnatoliaLabs/Anatol-X">
+            <span class="tr">Projeyi GitHub’da izle</span>
+            <span class="en">Follow the project on GitHub</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+
+          <span class="status">
+            <span class="tr">İNDİRME HENÜZ AÇIK DEĞİL</span>
+            <span class="en">DOWNLOAD NOT YET AVAILABLE</span>
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <div class="footer-brand">
+          ANATOL-X <span style="color: var(--cyan)">/</span> ANATOLIA LABS
+        </div>
+
+        <div>
+          <span class="tr">
+            Bir masaüstünden daha fazlası, devam eden bir yolculuk.
+          </span>
+
+          <span class="en">
+            More than a desktop, a journey in progress.
+          </span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://github.com/AnatoliaLabs/Anatol-X">GitHub ↗</a>
+        <a href="https://anatolialabs.github.io/anatol-x-apt/">APT ↗</a>
+
+        <a href="#top">
+          <span class="tr">Yukarı ↑</span>
+          <span class="en">Back to top ↑</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const button = document.getElementById("language");
+
+      button.addEventListener("click", () => {
+        const english = document.documentElement.lang !== "en";
+
+        document.documentElement.lang = english ? "en" : "tr";
+        button.textContent = english ? "TR" : "EN";
+
+        button.setAttribute(
+          "aria-label",
+          english ? "Türkçeye geç" : "Switch to English"
+        );
+
+        document.title = english
+          ? "Anatol-X — Make it your own"
+          : "Anatol-X — Kendi yolunu aç";
+      });
+    })();
+  </script>
 </body>
 </html>
