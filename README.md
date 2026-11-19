@@ -1,105 +1,125 @@
-# 🚀 Anatol-X Linux
+<div align="center">
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/AnatoliaLabs/Anatol-X/build.yml?style=for-the-badge&logo=github)
-![Version](https://img.shields.io/badge/Version-Alpha_2-blue?style=for-the-badge)
-![Base](https://img.shields.io/badge/Base-Debian_Testing-A81D33?style=for-the-badge&logo=debian)
-![Kernel](https://img.shields.io/badge/Kernel-Liquorix-black?style=for-the-badge&logo=linux)
-![Desktop](https://img.shields.io/badge/Desktop-KDE_Plasma-1D99F3?style=for-the-badge&logo=kde)
+<img src="assets/anatol-x-logo.png" alt="Anatol-X logo" width="180">
 
-**Anatol-X** is a modern Linux distribution built on the stability of Debian, specifically optimized for desktop fluidity and gaming performance. It aims to deliver maximum performance, ultra-low latency, and a clean user experience completely free of unnecessary bloatware.
+# Anatol-X Linux
 
-🌐 **Official Website:** [anatolialabs.github.io/Anatol-X](https://anatolialabs.github.io/Anatol-X)
+**A desktop Linux experience built on Debian.**
 
----
+[Website](https://anatolialabs.github.io/Anatol-X/) ·
+[Anatolia Labs](https://anatolialabs.github.io/) ·
+[Report an issue](https://github.com/AnatoliaLabs/Anatol-X/issues)
 
-## ✨ Key Features
-
-- 🏎️ **Liquorix Kernel:** Pre-installed with the high-performance Liquorix kernel to provide unmatched responsiveness, low-latency execution, and smooth multimedia/gaming performance.
-- 📦 **Debian Testing Base:** Powered by Debian Testing, giving you access to up-to-date software packages without sacrificing core system stability.
-- 🧹 **Debloated & Minimal:** Built with APT `Recommends` completely disabled. You get only the essential system packages and a pristine **KDE Plasma** desktop environment.
-- ⚙️ **Pure Systemd:** Cleaned of legacy SysVinit scripts, utilizing a modern, pure Systemd initialization stack.
-- 💿 **Fast & Easy Installation:** Features the intuitive **Calamares** installer, allowing you to deploy the OS to your drive in just a few clicks.
-
-## 📥 Download & Installation
-
-Anatol-X is currently in the **Alpha 2** stage. You can safely download the latest ISO image via SourceForge:
-
-[![Download Anatol-X](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/anatolialabs/files/latest/download)
-
-### Installation Steps
-1. Download the `.iso` file.
-2. Flash it onto a USB drive (minimum 4GB) using tools like [BalenaEtcher](https://etcher.balena.io/), [Rufus](https://rufus.ie/), or [Ventoy](https://www.ventoy.net/).
-3. Boot your PC from the USB drive.
-4. Explore the Live environment and double-click the **Install System (Calamares)** icon on the desktop to install it permanently.
-
-## 🛠️ Build from Source
-
-Anatol-X values transparency and is built entirely using open-source tools (`live-build`). If you want to build or customize the image yourself, follow these methods.
-
-### 1. Automated Build via GitHub Actions (Recommended)
-This repository includes a pre-configured CI/CD pipeline. 
-1. Fork this repository to your account.
-2. Go to the **Actions** tab.
-3. Select the **Anatol-X CI Build** workflow and click **Run workflow**. 
-GitHub runners will compile the ISO and deploy it based on your workflow configurations.
-
-### 2. Local Build
-To compile the ISO locally, you will need a Debian/Ubuntu-based machine and the `live-build` toolkit:
-
-```bash
-# Install required dependencies
-sudo apt update
-sudo apt install debootstrap curl git make gettext po4a
-
-# Clone and install the latest Live-Build from Debian Salsa
-git clone https://salsa.debian.org/live-team/live-build.git
-cd live-build
-sudo make install
-cd ..
-
-# Clone the official Anatol-X repository
-git clone https://github.com/AnatoliaLabs/Anatol-X.git
-cd Anatol-X
-
-# Configure and build the ISO
-sudo lb config
-sudo lb build
-
-```
-
-
-## 👥 Developers & Core Team
-
-**Yusuf Baran Kolsuzoğlu** ([@TheE1even11](https://github.com/TheE1even11)) - Founder & Core Team
-
-**Kağan Kırıktaş** ([@C-Stone-Labs](https://github.com/C-Stone-Labs)) - Founder & Core Team
-
-**Cuma Turan Yenilmez** ([@cumaturanyenilmez-rgb](https://github.com/cumaturanyenilmez-rgb)) - Founder & Core Team
-
-**Ali Turan Dal** (@[ATDNexus](https://github.com/ATDNexus)) - Founder & Core Team
-
-
-## 📬 Contact & Feedback
-
-Since Anatol-X is in its Alpha phase, your feedback is incredibly valuable to us! If you encounter bugs or want to suggest new features, please open an issue in the [GitHub Issues](https://github.com/AnatoliaLabs/Anatol-X/issues) section.
-
-For direct communication, you can reach the core team exclusively via the following official channels:
-
-* ✉️ **Primary Email:** [anatoliaosf@proton.me](mailto:anatoliaosf@proton.me)
-* ✉️ **Secondary Email:** [anatoliaosf@gmail.com](mailto:anatoliaosf@gmail.com)
-
-*Note: We do not use or support any other official communication platforms at this time.*
-
-## 📜 License & Acknowledgments
-
-This project is open-source. We extend our gratitude to the amazing open-source communities that made this distribution possible:
-
-* [The Debian Project](https://www.debian.org/)
-* [The Liquorix Kernel Team](https://liquorix.net/)
-* [KDE Plasma](https://kde.org/plasma-desktop/)
-* [The Live-Build Team](https://salsa.debian.org/live-team)
+</div>
 
 ---
 
-*Anatol-X Linux - Performance in its purest form.*
+## About
 
+**Anatol-X** is a Linux distribution in development by Anatolia Labs.
+It brings together a Debian foundation, the KDE Plasma desktop, and
+Anatolia Labs applications for gaming, productivity, and everyday use.
+
+🚧 **Anatol-X is under development. A public stable release is coming soon.**
+
+## What's planned
+
+The current development configuration for the amd64 image includes:
+
+- **Debian 13 Trixie** as the distribution base.
+- **KDE Plasma 6**, with Wayland as the default session.
+- The **Liquorix kernel** and matching headers.
+- **Anatolium**, a system browser based on Firefox ESR.
+- **KDE Discover**, with Flatpak as the preferred application source
+  and Flathub configured.
+- **Wine**, including 32-bit and 64-bit support.
+- A custom **Anatol-X GRUB theme** for the live image and installed system.
+- **Calamares** for graphical installation.
+- Anatolia Labs applications and system packages from a
+  signature-verified APT repository.
+
+These features describe the development configuration and may change
+before release. Recent changes still need testing in a booted image.
+
+## Download
+
+The public stable release is **not available yet**.
+
+Download information and installation instructions will be shared on
+the [Anatol-X website](https://anatolialabs.github.io/Anatol-X/) when
+the release is ready.
+
+## Compatibility notes
+
+- **Architecture:** the current development image targets amd64 / x86-64.
+- **Secure Boot:** Liquorix kernels are not signed for standard Secure
+  Boot. Disabling Secure Boot may be necessary unless you use a suitable
+  custom signing and enrollment setup.
+- **Hardware:** graphics drivers, Wi-Fi, and other hardware should be
+  tested on the intended device.
+- **Wine:** compatibility varies by application. Some Windows software,
+  games, and anti-cheat systems may not work.
+
+## Packages and updates
+
+Anatol-X uses APT for Debian and Anatolia Labs packages. The Anatol-X
+APT repository is signed, and APT verifies repository signatures.
+
+Flatpak and Flathub are also configured for application installation
+through KDE Discover. Users can change their preferred source in
+Discover's settings.
+
+The Updater included in the development configuration is experimental
+and remains a local package for now.
+
+[Anatol-X APT repository →](https://github.com/AnatoliaLabs/anatol-x-apt)
+
+## Development
+
+Anatol-X is built using Debian's
+[live-build](https://live-team.pages.debian.net/live-manual/) tools.
+Development builds are intended for testing and may be incomplete or
+change without notice.
+
+The current image configuration is maintained separately during
+development. The files in this public repository may not yet reflect
+the latest development build.
+
+## Developers & core team
+
+- **Yusuf Baran Kolsuzoğlu** — [@TheE1even11](https://github.com/yusufbaran11)
+- **Kağan Kırıktaş** — [@C-Stone-Labs](https://github.com/C-Stone-Labs)
+- **Cuma Turan Yenilmez** — [@cumaturanyenilmez-rgb](https://github.com/cumaturanyenilmez-rgb)
+- **Ali Turan Dal** — [@ATDNexus](https://github.com/ATDNexus)
+
+## Feedback and contact
+
+Found a problem or have an idea? Open an issue:
+
+[GitHub Issues →](https://github.com/AnatoliaLabs/Anatol-X/issues)
+
+For direct contact:
+
+- **Primary email:** [anatoliaosf@proton.me](mailto:anatoliaosf@proton.me)
+- **Secondary email:** [anatoliaosf@gmail.com](mailto:anatoliaosf@gmail.com)
+
+## License and acknowledgments
+
+This repository is licensed under the
+[GNU General Public License v3.0](LICENSE). Individual packages and
+third-party components may use their own licenses.
+
+Thanks to the projects and communities that make Anatol-X possible:
+
+- [Debian](https://www.debian.org/)
+- [KDE Plasma](https://kde.org/plasma-desktop/)
+- [Liquorix](https://liquorix.net/)
+- [Debian Live](https://live-team.pages.debian.net/)
+
+---
+
+<div align="center">
+
+**Anatol-X** · Made by Anatolia Labs
+
+</div>
